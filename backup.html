@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎮 ミニゲームセンター 🎮</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-b from-purple-200 via-pink-200 to-yellow-100 min-h-screen flex flex-col items-center">
+
+  <!-- ヘッダー -->
+  <header class="w-full bg-white shadow-md py-6 mb-6 text-center rounded-b-3xl">
+    <h1 class="text-4xl font-extrabold text-purple-700">🎉 ミニゲームセンター 🎉</h1>
+    <p class="text-gray-600 mt-1 text-lg">スマホでもPCでも楽しめるミニゲーム</p>
+  </header>
+
+  <!-- メインコンテンツ -->
+  <main class="flex-1 w-full max-w-6xl px-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- 飲みゲームカード -->
+      <div class="bg-white rounded-3xl shadow-lg p-6 flex flex-col items-center transform transition hover:-translate-y-2 hover:shadow-2xl">
+        <img src="https://cdn-icons-png.flaticon.com/512/3523/3523063.png" alt="飲みゲーム" class="w-24 h-24 mb-4">
+        <h2 class="text-2xl font-bold text-purple-600 mb-2 text-center">飲みゲーム</h2>
+        <p class="text-gray-600 text-center mb-4">ボタンを押して誰が飲むかを決めるドキドキゲーム！🍻</p>
+        <a href="drinkgame.html" class="bg-gradient-to-r from-red-400 to-yellow-400 text-white font-bold px-6 py-2 rounded-2xl hover:scale-105 transition transform">ゲームスタート ▶</a>
+      </div>
+
+      <!-- 今後追加予定ゲームカード -->
+      <div class="bg-white rounded-3xl shadow-inner p-6 flex flex-col items-center opacity-70">
+        <img src="https://cdn-icons-png.flaticon.com/512/4359/4359963.png" alt="準備中" class="w-24 h-24 mb-4">
+        <h2 class="text-2xl font-bold text-gray-500 mb-2 text-center">Coming Soon...</h2>
+        <p class="text-gray-500 text-center">新作ゲームをお楽しみに！</p>
+      </div>
+
+      <!-- ダミーゲームカード例 -->
+      <div class="bg-white rounded-3xl shadow-inner p-6 flex flex-col items-center opacity-70">
+        <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="準備中" class="w-24 h-24 mb-4">
+        <h2 class="text-2xl font-bold text-gray-500 mb-2 text-center">Coming Soon...</h2>
+        <p class="text-gray-500 text-center">次の楽しいゲームを準備中！</p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- フッター -->
+  <footer class="w-full py-4 mt-8 bg-white text-center shadow-inner">
+    <p class="text-gray-500 text-sm">&copy; 2025 MiniGame Portal</p>
+  </footer>
+
+</body>
+</html>
