@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>飲みゲーム - ギャグラー風</title>
+  <style>
+    body {
+      font-family: "Arial", sans-serif;
+      background-color: black;
+      color: white;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      margin-top: 50px;
+      font-size: 2em;
+      color: gold;
+    }
+    .slot {
+      font-size: 80px;
+      margin: 40px 0;
+    }
+    button {
+      font-size: 24px;
+      padding: 15px 40px;
+      border-radius: 10px;
+      border: none;
+      background: red;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0px 5px 10px rgba(255, 0, 0, 0.5);
+    }
+    button:hover {
+      background: darkred;
+    }
+    .result {
+      margin-top: 40px;
+      font-size: 1.5em;
+    }
+  </style>
+</head>
+<body>
+  <h1>🍺 ギャグラー風 飲みゲーム 🎰</h1>
+  <div class="slot" id="slot">❓</div>
+  <button onclick="play()">ボタンを押す！</button>
+  <div class="result" id="result"></div>
+
+  <script>
+    function play() {
+      const slot = document.getElementById("slot");
+      const result = document.getElementById("result");
+
+      // ランダム抽選（1/10）
+      const random = Math.floor(Math.random() * 10); // 0〜9
+      slot.textContent = "🎰";
+
+      setTimeout(() => {
+        if (random === 0) {
+          slot.textContent = "🍒";
+          result.innerHTML = "🍻 ボタンを押した人は飲んで！<br>🍻 ผู้กดปุ่มต้องดื่ม!";
+        } else {
+          slot.textContent = "❌";
+          result.innerHTML = "セーフ！もう一回試してね！";
+        }
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
