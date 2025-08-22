@@ -8,6 +8,9 @@
 </head>
 <body class="bg-gradient-to-b from-yellow-100 via-pink-200 to-purple-200 min-h-screen flex flex-col items-center justify-start">
 
+<!-- BGM -->
+<audio id="bgm" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop autoplay></audio>
+
 <header class="w-full bg-white shadow-md py-6 mb-8 rounded-b-3xl text-center">
   <h1 class="text-4xl font-extrabold text-purple-700">💥 飲みゲーム 💥</h1>
   <p class="text-gray-600 mt-2 text-lg">ボタンを押して、誰が飲むかを決めよう！🍶🍺</p>
@@ -31,37 +34,58 @@ document.addEventListener("DOMContentLoaded", function() {
   const button = document.getElementById("button");
   const result = document.getElementById("result");
 
+  // サウンド設定
+  const clickSound = new Audio("https://www.soundjay.com/button/sounds/button-16.mp3");
+
   function enableButton() {
     button.disabled = false;
     button.classList.remove("bg-gray-400", "cursor-not-allowed");
-    button.classList.add("bg-green-400", "hover:scale-105", "animate-pulse");
+    button.classList.add("bg-green-400", "hover:scale-105", "animate-pulse", "shadow-lg", "shadow-yellow-300");
     button.textContent = "押してね！";
   }
 
   function disableButton() {
     button.disabled = true;
-    button.classList.remove("bg-green-400", "hover:scale-105", "animate-pulse");
+    button.classList.remove("bg-green-400", "hover:scale-105", "animate-pulse", "shadow-lg", "shadow-yellow-300");
     button.classList.add("bg-gray-400", "cursor-not-allowed");
   }
 
   button.addEventListener("click", () => {
+    clickSound.currentTime = 0;
+    clickSound.play();
+
     const random = Math.floor(Math.random() * 10);
-    disableButton(); // 押した瞬間に無効化
-    if (random === 0) {
-      // 爆発
-      result.innerHTML = "💥 爆発！あなたは飲んで！🍶🍺<br><span class='text-red-600 text-lg'>ดื่มเลย!</span>";
-      result.className = "mt-6 text-3xl font-bold text-red-600 animate-bounce text-center";
-      setTimeout(() => {
-        result.innerHTML = "次の人、準備はいいですか？👀<br><span class='text-purple-700 text-lg'>คนต่อไป พร้อมหรือยัง?</span>";
-        result.className = "mt-6 text-2xl text-center";
-        enableButton(); // 次の人が押せるように
-      }, 4000);
-    } else {
-      // セーフ
-      result.innerHTML = "💨 セーフ！次の人にバトンタッチ！<br><span class='text-green-600'>ปลอดภัย! ต่อคนถัดไป!</span>";
-      result.className = "mt-6 text-2xl text-center";
-      enableButton(); // 押せる状態をすぐ表示
-    }
+    disableButton();
+
+    // テキストを一旦消す
+    result.innerHTML = "";
+    
+    setTimeout(() => {
+      if (random === 0) {
+        // 爆発
+        result.innerHTML = "💥 爆発！あなたは飲んで！🍶🍺<br><span class='text-red-600 text-lg'>ดื่มเลย!</span>";
+        result.className = "mt-6 text-3xl font-bold text-red-600 animate-bounce text-center";
+
+        setTimeout(() => {
+          result.innerHTML = "次の人、準備はいいですか？👀<br><span class='text-purple-700 text-lg'>คนต่อไป พร้อมหรือยัง?</span>";
+          result.className = "mt-6 text-2xl text-center";
+          enableButton();
+        }, 3000);
+
+      } else {
+        // セーフ
+        result.innerHTML = "💨 セーフ！次の人にバトンタッチ！<br><span class='text-green-600'>ปลอดภัย! ต่อคนถัดไป!</span>";
+        result.className = "mt-6 text-2xl text-center animate-pulse";
+
+        // 少しの間テキストを消して再表示
+        const currentHTML = result.innerHTML;
+        result.innerHTML = "";
+        setTimeout(() => {
+          result.innerHTML = currentHTML;
+          enableButton();
+        }, 500);
+      }
+    }, 200);
   });
 });
 </script>
