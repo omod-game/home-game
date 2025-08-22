@@ -15,8 +15,8 @@
 
 <main class="flex-1 w-full max-w-3xl px-4">
   <div class="bg-white rounded-3xl shadow-lg p-8 flex flex-col items-center">
-    <button id="button" class="bg-gradient-to-r from-red-400 to-yellow-400 text-white font-bold px-8 py-4 rounded-2xl text-2xl hover:scale-105 transform transition">
-      押す！
+    <button id="button" class="bg-green-400 hover:scale-105 text-white font-bold px-8 py-4 rounded-2xl text-2xl transition transform animate-pulse">
+      押してね！
     </button>
     <div id="result" class="mt-6 text-2xl text-center"></div>
   </div>
@@ -31,20 +31,36 @@ document.addEventListener("DOMContentLoaded", function() {
   const button = document.getElementById("button");
   const result = document.getElementById("result");
 
+  function enableButton() {
+    button.disabled = false;
+    button.classList.remove("bg-gray-400", "cursor-not-allowed");
+    button.classList.add("bg-green-400", "hover:scale-105", "animate-pulse");
+    button.textContent = "押してね！";
+  }
+
+  function disableButton() {
+    button.disabled = true;
+    button.classList.remove("bg-green-400", "hover:scale-105", "animate-pulse");
+    button.classList.add("bg-gray-400", "cursor-not-allowed");
+  }
+
   button.addEventListener("click", () => {
     const random = Math.floor(Math.random() * 10);
+    disableButton(); // 押した瞬間に無効化
     if (random === 0) {
+      // 爆発
       result.innerHTML = "💥 爆発！あなたは飲んで！🍶🍺<br><span class='text-red-600 text-lg'>ดื่มเลย!</span>";
       result.className = "mt-6 text-3xl font-bold text-red-600 animate-bounce text-center";
-      button.disabled = true;
       setTimeout(() => {
-        button.disabled = false;
         result.innerHTML = "次の人、準備はいいですか？👀<br><span class='text-purple-700 text-lg'>คนต่อไป พร้อมหรือยัง?</span>";
         result.className = "mt-6 text-2xl text-center";
+        enableButton(); // 次の人が押せるように
       }, 4000);
     } else {
+      // セーフ
       result.innerHTML = "💨 セーフ！次の人にバトンタッチ！<br><span class='text-green-600'>ปลอดภัย! ต่อคนถัดไป!</span>";
       result.className = "mt-6 text-2xl text-center";
+      enableButton(); // 押せる状態をすぐ表示
     }
   });
 });
