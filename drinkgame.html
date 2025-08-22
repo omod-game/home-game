@@ -31,8 +31,9 @@ document.addEventListener("DOMContentLoaded", function() {
   const button = document.getElementById("button");
   const result = document.getElementById("result");
 
-  // サウンド設定（クリック音のみ残す）
-  const clickSound = new Audio("https://www.soundjay.com/button/sounds/button-16.mp3");
+  // 効果音設定
+  const clickSound = new Audio("https://www.soundjay.com/button/sounds/button-16.mp3"); // クリック音
+  const drinkSound = new Audio("https://www.soundjay.com/button/sounds/button-09.mp3"); // ガコッ音の代替
 
   function enableButton() {
     button.disabled = false;
@@ -59,7 +60,10 @@ document.addEventListener("DOMContentLoaded", function() {
     
     setTimeout(() => {
       if (random === 0) {
-        // 爆発
+        // 爆発（飲む！）
+        drinkSound.currentTime = 0;
+        drinkSound.play(); // ガコッ音を鳴らす
+
         result.innerHTML = "💥 爆発！あなたは飲んで！🍶🍺<br><span class='text-red-600 text-lg'>ดื่มเลย!</span>";
         result.className = "mt-6 text-3xl font-bold text-red-600 animate-bounce text-center";
 
