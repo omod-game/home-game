@@ -1,39 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>飲みゲーム 🍻</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-b from-yellow-100 via-pink-200 to-purple-200 min-h-screen flex flex-col items-center justify-start">
+
+<header class="w-full bg-white shadow-md py-6 mb-8 rounded-b-3xl text-center">
+  <h1 class="text-4xl font-extrabold text-purple-700">💥 飲みゲーム 💥</h1>
+  <p class="text-gray-600 mt-2 text-lg">ボタンを押して、誰が飲むかを決めよう！🍶🍺</p>
+</header>
+
+<main class="flex-1 w-full max-w-3xl px-4">
+  <div class="bg-white rounded-3xl shadow-lg p-8 flex flex-col items-center">
+    <button id="button" class="bg-gradient-to-r from-red-400 to-yellow-400 text-white font-bold px-8 py-4 rounded-2xl text-2xl hover:scale-105 transform transition">
+      押す！
+    </button>
+    <div id="result" class="mt-6 text-2xl text-center"></div>
+  </div>
+</main>
+
+<footer class="w-full py-6 mt-12 bg-white text-center shadow-inner">
+  <p class="text-gray-500 text-sm">&copy; 2025 MiniGame Portal</p>
+</footer>
+
 <script>
-const button = document.getElementById("button");
-const result = document.getElementById("result");
-const explainBtn = document.getElementById("explainBtn");
-const popupOverlay = document.getElementById("popupOverlay");
-const popupClose = document.getElementById("popupClose");
+document.addEventListener("DOMContentLoaded", function() {
+  const button = document.getElementById("button");
+  const result = document.getElementById("result");
 
-button.addEventListener("click", () => {
-  const random = Math.floor(Math.random() * 10);
-  if (random === 0) {
-    result.innerHTML = "💥 爆発！<br>あなたは飲んで！🍶🍺<br><br>💥 ระเบิด!<br>คุณต้องดื่ม! 🍶🍺";
-    result.className = "boom";
-    button.disabled = true;
-    // 数秒後に文字をリセットしてボタン復活
-    setTimeout(() => {
-      button.disabled = false;
-      result.innerHTML = "次の人、準備はいいですか？👀<br>ถึงตาคนต่อไปแล้ว พร้อมหรือยัง? 👀";
-      result.className = "";
-    }, 4000);
-  } else {
-    result.innerHTML = "💨 セーフ！次の人にバトンタッチ！<br>💨 ปลอดภัย! ส่งต่อให้คนถัดไป!";
-    result.className = "";
-  }
-});
-
-explainBtn.addEventListener("click", () => {
-  popupOverlay.style.display = "flex";
-});
-
-popupClose.addEventListener("click", () => {
-  popupOverlay.style.display = "none";
-});
-
-popupOverlay.addEventListener("click", (e) => {
-  if (e.target === popupOverlay) {
-    popupOverlay.style.display = "none";
-  }
+  button.addEventListener("click", () => {
+    const random = Math.floor(Math.random() * 10);
+    if (random === 0) {
+      result.innerHTML = "💥 爆発！あなたは飲んで！🍶🍺<br><span class='text-red-600 text-lg'>ดื่มเลย!</span>";
+      result.className = "mt-6 text-3xl font-bold text-red-600 animate-bounce text-center";
+      button.disabled = true;
+      setTimeout(() => {
+        button.disabled = false;
+        result.innerHTML = "次の人、準備はいいですか？👀<br><span class='text-purple-700 text-lg'>คนต่อไป พร้อมหรือยัง?</span>";
+        result.className = "mt-6 text-2xl text-center";
+      }, 4000);
+    } else {
+      result.innerHTML = "💨 セーフ！次の人にバトンタッチ！<br><span class='text-green-600'>ปลอดภัย! ต่อคนถัดไป!</span>";
+      result.className = "mt-6 text-2xl text-center";
+    }
+  });
 });
 </script>
+
+</body>
+</html>
