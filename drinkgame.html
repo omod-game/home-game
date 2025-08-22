@@ -8,9 +8,6 @@
 </head>
 <body class="bg-gradient-to-b from-yellow-100 via-pink-200 to-purple-200 min-h-screen flex flex-col items-center justify-start">
 
-<!-- BGM -->
-<audio id="bgm" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop autoplay></audio>
-
 <header class="w-full bg-white shadow-md py-6 mb-8 rounded-b-3xl text-center">
   <h1 class="text-4xl font-extrabold text-purple-700">💥 飲みゲーム 💥</h1>
   <p class="text-gray-600 mt-2 text-lg">ボタンを押して、誰が飲むかを決めよう！🍶🍺</p>
@@ -34,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const button = document.getElementById("button");
   const result = document.getElementById("result");
 
-  // サウンド設定
+  // サウンド設定（クリック音のみ残す）
   const clickSound = new Audio("https://www.soundjay.com/button/sounds/button-16.mp3");
 
   function enableButton() {
