@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>短編ギャルゲー Demo 💖</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-b from-pink-200 via-purple-200 to-blue-200 min-h-screen flex flex-col items-center justify-start">
+
+<!-- BGM -->
+<audio id="bgm" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop autoplay></audio>
+
+<header class="w-full bg-white shadow-md py-6 mb-6 rounded-b-3xl text-center">
+  <h1 class="text-4xl font-extrabold text-purple-700">🌸 短編ギャルゲー Demo 🌸</h1>
+  <p class="text-gray-600 mt-2 text-lg">選択肢でキャラクターとの関係が変わる体験！</p>
+</header>
+
+<main class="flex-1 w-full max-w-3xl px-4">
+  <div class="bg-white rounded-3xl shadow-lg p-6 flex flex-col items-center">
+
+    <!-- キャラクター立ち絵 -->
+    <img id="charImage" src="https://cdn-icons-png.flaticon.com/512/1998/1998611.png" alt="キャラクター" class="w-48 h-48 mb-4 rounded-2xl shadow-lg">
+
+    <!-- テキストボックス -->
+    <div id="textBox" class="bg-gray-100 rounded-2xl p-4 w-full text-center text-lg shadow-inner mb-6">
+      今日、学校で友達に会いました。どうしますか？
+    </div>
+
+    <!-- 選択肢 -->
+    <div id="options" class="flex flex-col gap-4 w-full">
+      <button class="bg-pink-400 text-white font-bold py-2 rounded-2xl hover:scale-105 transition" onclick="choose(0)">笑顔で挨拶する</button>
+      <button class="bg-purple-400 text-white font-bold py-2 rounded-2xl hover:scale-105 transition" onclick="choose(1)">無視して通り過ぎる</button>
+    </div>
+  </div>
+</main>
+
+<footer class="w-full py-6 mt-12 bg-white text-center shadow-inner">
+  <p class="text-gray-500 text-sm">&copy; 2025 MiniGame Portal</p>
+</footer>
+
+<script>
+const bgm = document.getElementById("bgm");
+bgm.volume = 0.2;
+
+// 効果音
+const clickSound = new Audio("https://www.soundjay.com/button/sounds/button-16.mp3");
+const cheerSound = new Audio("https://www.soundjay.com/human/sounds/applause-8.mp3");
+
+// キャラクター画像
+const characters = {
+  main: "https://cdn-icons-png.flaticon.com/512/1998/1998611.png",
+  friend: "https://cdn-icons-png.flaticon.com/512/1998/1998610.png"
+};
+
+// シナリオデータ
+const scenarios = [
+  {
+    text: "あなたは笑顔で挨拶した。友達もにっこり笑って返してくれました。",
+    img: characters.friend,
+    options: ["もっと話しかける", "授業に戻る"],
+    goodEnd: false
+  },
+  {
+    text: "無視して通り過ぎると、友達は少し寂しそうな表情。",
+    img: characters.friend,
+    options: ["謝る", "そのまま行く"],
+    goodEnd: false
+  },
+  {
+    text: "友達と楽しく話せました！🎉 好感度 +1",
+    img: characters.friend,
+    options: ["次の場面へ"],
+    goodEnd: true
+  },
+  {
+    text: "授業に戻りました。普通の一日です。",
+    img: characters.main,
+    options: ["次の場面へ"],
+    goodEnd: false
+  },
+  {
+    text: "友達と仲直りできました💖 好感度 +1",
+    img: characters.friend,
+    options: ["次の場面へ"],
+    goodEnd: true
+  },
+  {
+    text: "そのまま一日が終わりました。",
+    img: characters.main,
+    options: ["次の場面へ"],
+    goodEnd: false
+  },
+  {
+    text: "ゲーム終了！あなたの今日の結果は…",
+    img: characters.main,
+    options: [],
+    goodEnd: true
+  }
+];
+
+let currentScenario = 0;
+let score = 0;
+
+function choose(optionIndex) {
+  clickSound.currentTime = 0;
+  clickSound.play();
+
+  const scenario = scenarios[currentScenario];
+
+  // 分岐処理
+  if (currentScenario === 0) {
+    if(optionIndex === 0){
+      currentScenario = 2;
+      score++;
+      cheerSound.play();
+    } else {
+      currentScenario = 3;
+    }
+  } else if (currentScenario === 1) {
+    if(optionIndex === 0){
+      currentScenario = 4;
+      score++;
+      cheerSound.play();
+    } else {
+      currentScenario = 5;
+    }
+  } else if ([2,3,4,5].includes(currentScenario)) {
+    currentScenario = 6;
+  } else if (currentScenario === 6) {
+    // 結果表示
+    let resultText = score > 0 ? "💖 良い一日でした！" : "😐 普通の日でした。";
+    document.getElementById("textBox").innerHTML = resultText;
+    document.getElementById("charImage").src = characters.main;
+    document.getElementById("options").innerHTML = "";
+    return;
+  }
+
+  // 更新
+  const nextScenario = scenarios[currentScenario];
+  document.getElementById("textBox").innerHTML = nextScenario.text;
+  document.getElementById("charImage").src = nextScenario.img;
+
+  // 選択肢作成
+  const optionsDiv = document.getElementById("options");
+  optionsDiv.innerHTML = "";
+  nextScenario.options.forEach((opt, idx) => {
+    const btn = document.createElement("button");
+    btn.className = "bg-pink-400 text-white font-bold py-2 rounded-2xl hover:scale-105 transition";
+    btn.textContent = opt;
+    btn.onclick = () => choose(idx);
+    optionsDiv.appendChild(btn);
+  });
+}
+</script>
+
+</body>
+</html>
