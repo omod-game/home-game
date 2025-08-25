@@ -126,3 +126,27 @@ body {
   margin: 0;
   white-space: pre-line;
 }
+
+#centurycyclememoria-text-box {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 800px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid #fff;
+  border-radius: 12px;
+  padding: 20px;
+  color: #fff;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+#centurycyclememoria-char-image {
+  position: absolute;
+  bottom: 0;
+  right: 5%; /* ←ここで左右調整 */
+  height: 90%;
+}
+
