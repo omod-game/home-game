@@ -127,6 +127,7 @@ body {
   white-space: pre-line;
 }
 
+/* タイトルの幅調整テスト */
 #centurycyclememoria-text-box {
   position: absolute;
   bottom: 0;
