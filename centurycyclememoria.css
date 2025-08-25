@@ -1,66 +1,64 @@
-/* 全体 */
 body, html {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+  font-family: "Yu Gothic", sans-serif;
+  background: black;
 }
 
-/* タイトル画面 */
-.centurycyclememoria-title-screen {
-  background: url("centurycyclememoriacollection.jpg") no-repeat center center;
-  background-size: cover;
-  width: 100%;
-  height: 100vh;
+#centurycyclememoria-start-screen {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end; /* 下寄せ配置 */
   align-items: center;
-  text-align: center;
+  justify-content: center;
+  height: 100vh;
+  background: black;
   color: white;
-  position: relative;
 }
 
-.centurycyclememoria-overlay {
-  background: rgba(0,0,0,0.4); /* 半透明オーバーレイ */
-  width: 100%;
-  padding: 40px 20px;
-  box-sizing: border-box;
-}
-
-.centurycyclememoria-game-title {
-  font-size: 3em;
-  margin: 0 0 20px 0;
-}
-
-.centurycyclememoria-start-button {
-  font-size: 1.5em;
-  padding: 12px 40px;
-  border: none;
-  border-radius: 8px;
-  background: #ffffffcc;
-  color: #333;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.centurycyclememoria-start-button:hover {
-  background: #ffddddcc;
-}
-
-/* ゲーム画面 */
-#centurycyclememoria-game-container {
-  padding: 20px;
-}
-
-#centurycyclememoria-game-text {
-  font-size: 1.2em;
+.centurycyclememoria-title {
+  font-size: 2.5em;
   margin-bottom: 20px;
 }
 
-#centurycyclememoria-game-choices button {
-  display: block;
-  margin: 10px 0;
+.centurycyclememoria-title-image {
+  max-width: 80%;
+  margin-bottom: 20px;
+}
+
+#centurycyclememoria-start-button {
   padding: 10px 20px;
-  font-size: 1em;
+  font-size: 1.2em;
+}
+
+#centurycyclememoria-game-screen {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#centurycyclememoria-background img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#centurycyclememoria-character img {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  max-height: 90%;
+}
+
+#centurycyclememoria-textbox {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  padding: 20px;
+  box-sizing: border-box;
 }
