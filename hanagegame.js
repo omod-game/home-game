@@ -67,7 +67,6 @@ function draw() {
         ctx.save();
         ctx.translate(hair.x, hair.y);
 
-        // 鼻毛揺れ
         if (!hair.pulled) {
             hair.angle += hair.swaySpeed * hair.swayDir;
             if (Math.abs(hair.angle) > Math.PI/6) hair.swayDir *= -1;
@@ -75,7 +74,6 @@ function draw() {
 
         ctx.rotate(hair.angle);
 
-        // 抜くアニメーション
         let length = hair.length;
         if (hair.pulled && hair.pullProgress < 1) {
             hair.pullProgress += 0.1;
