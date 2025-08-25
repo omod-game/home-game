@@ -1,158 +1,140 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>短編ギャルゲー Demo 💖</title>
-<script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gradient-to-b from-pink-200 via-purple-200 to-blue-200 min-h-screen flex flex-col items-center justify-start">
+// 世紀輪廻メモリア 開発用分岐テンプレート
 
-<!-- BGM -->
-<audio id="bgm" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" loop autoplay></audio>
-
-<header class="w-full bg-white shadow-md py-6 mb-6 rounded-b-3xl text-center">
-  <h1 class="text-4xl font-extrabold text-purple-700">🌸 短編ギャルゲー Demo 🌸</h1>
-  <p class="text-gray-600 mt-2 text-lg">選択肢でキャラクターとの関係が変わる体験！</p>
-</header>
-
-<main class="flex-1 w-full max-w-3xl px-4">
-  <div class="bg-white rounded-3xl shadow-lg p-6 flex flex-col items-center">
-
-    <!-- キャラクター立ち絵 -->
-    <img id="charImage" src="https://cdn-icons-png.flaticon.com/512/1998/1998611.png" alt="キャラクター" class="w-48 h-48 mb-4 rounded-2xl shadow-lg">
-
-    <!-- テキストボックス -->
-    <div id="textBox" class="bg-gray-100 rounded-2xl p-4 w-full text-center text-lg shadow-inner mb-6">
-      今日、学校で友達に会いました。どうしますか？
-    </div>
-
-    <!-- 選択肢 -->
-    <div id="options" class="flex flex-col gap-4 w-full">
-      <button class="bg-pink-400 text-white font-bold py-2 rounded-2xl hover:scale-105 transition" onclick="choose(0)">笑顔で挨拶する</button>
-      <button class="bg-purple-400 text-white font-bold py-2 rounded-2xl hover:scale-105 transition" onclick="choose(1)">無視して通り過ぎる</button>
-    </div>
-  </div>
-</main>
-
-<footer class="w-full py-6 mt-12 bg-white text-center shadow-inner">
-  <p class="text-gray-500 text-sm">&copy; 2025 MiniGame Portal</p>
-</footer>
-
-<script>
-const bgm = document.getElementById("bgm");
-bgm.volume = 0.2;
-
-// 効果音
-const clickSound = new Audio("https://www.soundjay.com/button/sounds/button-16.mp3");
-const cheerSound = new Audio("https://www.soundjay.com/human/sounds/applause-8.mp3");
-
-// キャラクター画像
-const characters = {
-  main: "https://cdn-icons-png.flaticon.com/512/1998/1998611.png",
-  friend: "https://cdn-icons-png.flaticon.com/512/1998/1998610.png"
+// --- ゲーム状態管理 ---
+const GameState = {
+  chapter: 1,                // 現在の章
+  affection: {               // 好感度
+    Miku: 0,
+    Shizuka: 0,
+    Rena: 0
+  },
+  flags: {                   // フラグ管理
+    F_Miku_Help: false,
+    F_Library_Key: false,
+    F_Council_Pass: false,
+    F_Rooftop_Promise: false,
+    F_Forbidden_Tome: false,
+    F_Shrine_Access: false
+  },
+  BellShard: 0,              // 鐘の断片数
+  hiddenUnlocked: false      // 隠しルート解放
 };
 
-// シナリオデータ
-const scenarios = [
-  {
-    text: "あなたは笑顔で挨拶した。友達もにっこり笑って返してくれました。",
-    img: characters.friend,
-    options: ["もっと話しかける", "授業に戻る"],
-    goodEnd: false
-  },
-  {
-    text: "無視して通り過ぎると、友達は少し寂しそうな表情。",
-    img: characters.friend,
-    options: ["謝る", "そのまま行く"],
-    goodEnd: false
-  },
-  {
-    text: "友達と楽しく話せました！🎉 好感度 +1",
-    img: characters.friend,
-    options: ["次の場面へ"],
-    goodEnd: true
-  },
-  {
-    text: "授業に戻りました。普通の一日です。",
-    img: characters.main,
-    options: ["次の場面へ"],
-    goodEnd: false
-  },
-  {
-    text: "友達と仲直りできました💖 好感度 +1",
-    img: characters.friend,
-    options: ["次の場面へ"],
-    goodEnd: true
-  },
-  {
-    text: "そのまま一日が終わりました。",
-    img: characters.main,
-    options: ["次の場面へ"],
-    goodEnd: false
-  },
-  {
-    text: "ゲーム終了！あなたの今日の結果は…",
-    img: characters.main,
-    options: [],
-    goodEnd: true
+// --- 選択肢定義 ---
+const Choices = {
+  commonChapter1: [
+    { label: "未来の部誌手伝い", affect: {Miku: 2}, flag: "F_Miku_Help" },
+    { label: "図書室で静の整理手伝い", affect: {Shizuka: 2}, flag: "F_Library_Key" },
+    { label: "生徒会の資料運び", affect: {Rena: 2}, flag: "F_Council_Pass" }
+  ],
+  commonChapter2: [
+    { label: "未来と前夜祭", affect: {Miku: 2} },
+    { label: "静と前夜祭", affect: {Shizuka: 2} },
+    { label: "玲奈と前夜祭", affect: {Rena: 2} }
+  ]
+  // 各章・ルートの選択肢は同様に追加可能
+};
+
+// --- チャプター進行関数 ---
+function nextChapter() {
+  GameState.chapter += 1;
+  switch(GameState.chapter) {
+    case 2:
+      startChapter2();
+      break;
+    case 3:
+      startChapter3();
+      break;
+    default:
+      checkHiddenRoute();
+      break;
   }
-];
-
-let currentScenario = 0;
-let score = 0;
-
-function choose(optionIndex) {
-  clickSound.currentTime = 0;
-  clickSound.play();
-
-  const scenario = scenarios[currentScenario];
-
-  // 分岐処理
-  if (currentScenario === 0) {
-    if(optionIndex === 0){
-      currentScenario = 2;
-      score++;
-      cheerSound.play();
-    } else {
-      currentScenario = 3;
-    }
-  } else if (currentScenario === 1) {
-    if(optionIndex === 0){
-      currentScenario = 4;
-      score++;
-      cheerSound.play();
-    } else {
-      currentScenario = 5;
-    }
-  } else if ([2,3,4,5].includes(currentScenario)) {
-    currentScenario = 6;
-  } else if (currentScenario === 6) {
-    // 結果表示
-    let resultText = score > 0 ? "💖 良い一日でした！" : "😐 普通の日でした。";
-    document.getElementById("textBox").innerHTML = resultText;
-    document.getElementById("charImage").src = characters.main;
-    document.getElementById("options").innerHTML = "";
-    return;
-  }
-
-  // 更新
-  const nextScenario = scenarios[currentScenario];
-  document.getElementById("textBox").innerHTML = nextScenario.text;
-  document.getElementById("charImage").src = nextScenario.img;
-
-  // 選択肢作成
-  const optionsDiv = document.getElementById("options");
-  optionsDiv.innerHTML = "";
-  nextScenario.options.forEach((opt, idx) => {
-    const btn = document.createElement("button");
-    btn.className = "bg-pink-400 text-white font-bold py-2 rounded-2xl hover:scale-105 transition";
-    btn.textContent = opt;
-    btn.onclick = () => choose(idx);
-    optionsDiv.appendChild(btn);
-  });
 }
-</script>
 
-</body>
-</html>
+// --- 共通ルート第2章 ---
+function startChapter2() {
+  // ここで選択肢を表示
+  // 例: showChoices(Choices.commonChapter2);
+}
+
+// --- 共通ルート第3章（零時の囁き） ---
+function startChapter3() {
+  // 最大好感度ヒロインの判定
+  const maxAffection = Math.max(...Object.values(GameState.affection));
+  const candidates = Object.keys(GameState.affection).filter(
+    key => GameState.affection[key] === maxAffection
+  );
+  
+  // 同率の場合は選択肢を表示、単独なら自動ルート移行
+  if(candidates.length > 1) {
+    // showChoiceForTie(candidates);
+  } else {
+    // moveToRoute(candidates[0]);
+  }
+}
+
+// --- 個別ルート関数（例：未来ルート） ---
+function mikuRoute() {
+  // 章1：雨宿りの屋上
+  // setFlag('F_Rooftop_Promise');
+
+  // 章2：写真部暗室
+  // 選択：真実を掘る / 今を守る
+
+  // 章3：星祭の告白
+  // Good / Bitter / Bad の分岐
+}
+
+// --- 静ルート ---
+function shizukaRoute() {
+  // 章1：禁書「世紀紋章」
+  // 章2：地下資料庫
+  // 章3：現し世と記憶の境
+}
+
+// --- 玲奈ルート ---
+function renaRoute() {
+  // 章1：儀礼の段取り
+  // 章2：代償
+  // 章3：0:00の選択
+}
+
+// --- 隠しルート判定 ---
+function checkHiddenRoute() {
+  const goodOrBitterAll =
+    GameState.affection.Miku > 0 &&
+    GameState.affection.Shizuka > 0 &&
+    GameState.affection.Rena > 0 &&
+    GameState.BellShard >= 5;
+
+  const noBad = true; // 周回でBad踏まない場合
+  if(goodOrBitterAll && noBad) {
+    GameState.hiddenUnlocked = true;
+    startHiddenChapter();
+  }
+}
+
+// --- 隠し章 ---
+function startHiddenChapter() {
+  // 夢の人物登場
+  // 選択肢：
+  // 1. 日常を守り輪廻を受け入れる
+  // 2. 3人の選択総和で輪廻を停止
+}
+
+// --- フラグ設定関数 ---
+function setFlag(flagName) {
+  GameState.flags[flagName] = true;
+}
+
+// --- 好感度増加関数 ---
+function increaseAffection(character, value) {
+  if(GameState.affection[character] !== undefined) {
+    GameState.affection[character] += value;
+  }
+}
+
+// --- BellShard増加関数 ---
+function gainBellShard(amount) {
+  GameState.BellShard += amount;
+}
