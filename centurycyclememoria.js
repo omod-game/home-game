@@ -22,22 +22,36 @@ window.addEventListener("load", () => {
 
 // シナリオ（未来との出会い）
 const scenario = [
-  { text: "──四月、転校初日の朝。", bg: "ccm_classroom_bg.jpg", char: "" },
-  { text: "教室に入ると、ざわめきと新しい匂いが押し寄せてきた。", bg: "ccm_classroom_bg.jpg", char: "" },
-  { text: "「……ここが、俺の新しい日常か」", bg: "ccm_classroom_bg.jpg", char: "" },
-  { text: "緊張で胸が重い。それでも、期待に似たざわつきがどこか奥にある。", bg: "ccm_classroom_bg.jpg", char: "" },
-  { text: "黒板には『席替え』と書かれていた。", bg: "ccm_classroom_bg.jpg", char: "" },
-  { text: "残った席は──桜井未来の隣だった。", bg: "ccm_classroom_bg.jpg", char: "" },
-  { text: "未来が振り返り、ぱっと咲くように笑った。", bg: "ccm_miku_smile.jpg", char: "" },
-  { text: "未来「よろしくね！」", bg: "ccm_miku_smile.jpg", char: "" },
-  { text: "偶然のようでいて、なぜかずっと前から決まっていた気がした。", bg: "ccm_miku_dream.jpg", char: "" , overlay: true}
+  { text: "──四月、転校初日の朝。", bg: "ccm_classroom_bg.jpg", group: true },
+  { text: "教室に入ると、ざわめきと新しい匂いが押し寄せてきた。", bg: "ccm_classroom_bg.jpg" },
+  { text: "「……ここが、俺の新しい日常か」", bg: "ccm_classroom_bg.jpg" },
+  { text: "緊張で胸が重い。それでも、期待に似たざわつきがどこか奥にある。", bg: "ccm_classroom_bg.jpg", group: true },
+  { text: "黒板には『席替え』と書かれていた。", bg: "ccm_classroom_bg.jpg" },
+  { text: "残った席は──桜井未来の隣だった。", bg: "ccm_classroom_bg.jpg" },
+  { text: "未来が振り返り、ぱっと咲くように笑った。", bg: "ccm_miku_smile.jpg" },
+  { text: "未来「よろしくね！」", bg: "ccm_miku_smile.jpg" },
+  { text: "偶然のようでいて、なぜかずっと前から決まっていた気がした。", bg: "ccm_miku_dream.jpg", overlay: true }
 ];
 
 let currentLine = 0;
 
 function showLine() {
-  const line = scenario[currentLine];
-  textElement.textContent = line.text;
+  let line = scenario[currentLine];
+  let nextLine = scenario[currentLine + 1];
+
+  // group: true がある場合は、次の行と一緒に表示
+  if (line.group && nextLine) {
+    textElement.textContent = line.text + "\n" + nextLine.text;
+    currentLine += 2; // 2行進める
+    applyLineSettings(nextLine); // 演出は後ろの行の設定を反映
+  } else {
+    textElement.textContent = line.text;
+    currentLine += 1; // 1行進める
+    applyLineSettings(line);
+  }
+}
+
+function applyLineSettings(line) {
   if (line.bg) bgImage.src = line.bg;
   if (line.char) {
     charImage.style.display = "block";
@@ -45,16 +59,11 @@ function showLine() {
   } else {
     charImage.style.display = "none";
   }
-  if (line.overlay) {
-    overlay.style.opacity = 1;
-  } else {
-    overlay.style.opacity = 0;
-  }
+  overlay.style.opacity = line.overlay ? 1 : 0;
 }
 
 gameScreen.addEventListener("click", () => {
-  if (currentLine < scenario.length - 1) {
-    currentLine++;
+  if (currentLine < scenario.length) {
     showLine();
   } else {
     textElement.textContent = "（次のシナリオへ…）";
