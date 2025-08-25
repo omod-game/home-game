@@ -11,17 +11,18 @@ const pullSound = new Audio('hanagegame.mp3');
 // 鼻毛生成
 function generateNoseHairs() {
     noseHairs = [];
-    const numHairs = 15;
+    const numHairs = 20; // 鼻毛の本数を増やす
     for (let i = 0; i < numHairs; i++) {
         noseHairs.push({
             x: 180 + Math.random() * 40,
-            y: 180 + Math.random() * 20,
-            length: 20 + Math.random() * 15,
-            angle: Math.random() * Math.PI/6 - Math.PI/12,
+            y: 200 + Math.random() * 20, // 鼻の下あたり
+            length: 15 + Math.random() * 20,
+            angle: Math.random() * Math.PI/8 - Math.PI/16,
             swayDir: Math.random() > 0.5 ? 1 : -1,
             swaySpeed: 0.02 + Math.random() * 0.02,
             pulled: false,
-            pullProgress: 0
+            pullProgress: 0,
+            width: 1 + Math.random() * 0.5
         });
     }
 }
@@ -61,28 +62,35 @@ function draw() {
     ctx.fill();
 
     // 鼻毛描画
-    ctx.strokeStyle = 'brown';
-    ctx.lineWidth = 2;
     noseHairs.forEach(hair => {
+        if (hair.pulled && hair.pullProgress >= 1) return; // 完全に抜けたら描画しない
+
         ctx.save();
         ctx.translate(hair.x, hair.y);
 
+        // 揺れ
         if (!hair.pulled) {
             hair.angle += hair.swaySpeed * hair.swayDir;
-            if (Math.abs(hair.angle) > Math.PI/6) hair.swayDir *= -1;
+            if (Math.abs(hair.angle) > Math.PI/8) hair.swayDir *= -1;
         }
 
-        ctx.rotate(hair.angle);
-
+        // 抜くアニメーション
         let length = hair.length;
         if (hair.pulled && hair.pullProgress < 1) {
-            hair.pullProgress += 0.1;
+            hair.pullProgress += 0.08; // 抜けるスピード
             length = hair.length * (1 - hair.pullProgress);
+            hair.y += 1.5; // 下方向に移動
         }
+
+        const sway = hair.pulled ? Math.sin(hair.pullProgress * Math.PI * 4) * 0.2 : 0;
+        ctx.rotate(hair.angle + sway);
+
+        ctx.strokeStyle = `rgb(${100 + Math.random()*50}, 50, 0)`; // 色の濃淡で自然
+        ctx.lineWidth = hair.width * (1 - hair.pullProgress); // 抜くと先端細くなる
 
         ctx.beginPath();
         ctx.moveTo(0, 0);
-        ctx.lineTo(0, -length);
+        ctx.lineTo(0, length); // 下向き
         ctx.stroke();
         ctx.restore();
     });
@@ -100,7 +108,7 @@ canvas.addEventListener('click', (e) => {
         if (!hair.pulled) {
             const hx = hair.x;
             const hy = hair.y;
-            if (mx > hx - 5 && mx < hx + 5 && my > hy - hair.length && my < hy) {
+            if (mx > hx - 5 && mx < hx + 5 && my > hy && my < hy + hair.length) {
                 hair.pulled = true;
                 pullSound.currentTime = 0;
                 pullSound.play();
