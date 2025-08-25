@@ -38,18 +38,33 @@ let currentLine = 0;
 function showLine() {
   let line = scenario[currentLine];
   let nextLine = scenario[currentLine + 1];
+  let displayText = "";
 
-  // group: true がある場合は、次の行と一緒に表示
+  // group: true がある場合は2行まとめて表示
   if (line.group && nextLine) {
-    textElement.textContent = line.text + "\n" + nextLine.text;
+    displayText = formatText(line.text) + "\n" + formatText(nextLine.text);
     currentLine += 2; // 2行進める
-    applyLineSettings(nextLine); // 演出は後ろの行の設定を反映
+    applyLineSettings(nextLine); // 演出は後ろの行を反映
   } else {
-    textElement.textContent = line.text;
-    currentLine += 1; // 1行進める
+    displayText = formatText(line.text);
+    currentLine += 1;
     applyLineSettings(line);
   }
+
+  textElement.innerHTML = displayText.replace(/\n/g, "<br>");
 }
+
+// テキスト整形（キャラ名で色分けなど）
+function formatText(text) {
+  if (text.startsWith("未来")) {
+    return text.replace(
+      "未来",
+      "<span style='color:#ff7fbf;font-weight:bold;'>未来</span>"
+    );
+  }
+  return text;
+}
+
 
 function applyLineSettings(line) {
   if (line.bg) bgImage.src = line.bg;
