@@ -43,7 +43,10 @@ body, html {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: opacity 0.5s ease-in-out; /* フェード切替 */
+  opacity: 1;
 }
+
 
 #centurycyclememoria-character img {
   position: absolute;
