@@ -6,7 +6,7 @@ let noseHairs = [];
 let eyeOpen = true;
 
 // 鼻毛を抜く音
-const pullSound = new Audio('sounds/pull.mp3');
+const pullSound = new Audio('hanagegame.mp3');
 
 // 鼻毛生成
 function generateNoseHairs() {
