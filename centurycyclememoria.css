@@ -1,59 +1,102 @@
-body, html {
+body {
   margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: "Yu Gothic", sans-serif;
-  background: black;
-}
-
-#centurycyclememoria-start-screen {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background: black;
-  color: white;
-}
-
-.centurycyclememoria-title {
-  font-size: 2.5em;
-  margin-bottom: 20px;
-}
-
-.centurycyclememoria-title-image {
-  max-width: 80%;
-  margin-bottom: 20px;
-}
-
-#centurycyclememoria-start-button {
-  padding: 10px 20px;
-  font-size: 1.2em;
-}
-
-#centurycyclememoria-game-screen {
-  position: relative;
-  width: 100%;
-  height: 100vh;
+  font-family: "Hiragino Maru Gothic ProN", "メイリオ", sans-serif;
+  background: #000;
+  color: #fff;
   overflow: hidden;
 }
 
-#centurycyclememoria-background img {
-  position: absolute;
+/* タイトル画面 */
+#centurycyclememoria-start-screen {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  overflow: hidden;
+}
+
+.centurycyclememoria-title-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: opacity 0.5s ease-in-out; /* フェード切替 */
-  opacity: 1;
 }
 
+.centurycyclememoria-title {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 3em;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+  z-index: 2;
+}
+
+.centurycyclememoria-subtitle {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.4em;
+  font-style: italic;
+  color: #fdfdfd;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.9);
+  opacity: 0;
+  transition: opacity 3s ease;
+  z-index: 2;
+}
+
+#centurycyclememoria-start-button {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 30px;
+  font-size: 1.5em;
+  border: none;
+  background: rgba(255,255,255,0.8);
+  color: #000;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 2;
+  display: none;
+}
+
+#centurycyclememoria-start-button:hover {
+  background: rgba(255,255,255,1);
+}
+
+/* ゲーム画面 */
+#centurycyclememoria-game-screen {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+#centurycyclememoria-background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#centurycyclememoria-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: radial-gradient(circle at center, rgba(255,255,200,0.4), transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 2s ease;
+}
 
 #centurycyclememoria-character img {
   position: absolute;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  max-height: 90%;
+  height: 80%;
+  display: none;
 }
 
 #centurycyclememoria-textbox {
@@ -61,7 +104,7 @@ body, html {
   bottom: 0;
   width: 100%;
   background: rgba(0,0,0,0.6);
-  color: white;
   padding: 20px;
+  font-size: 1.2em;
   box-sizing: border-box;
 }
