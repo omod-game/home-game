@@ -1,0 +1,5 @@
+cd nosehair-game
+touch .nojekyll
+git add .nojekyll
+git commit -m "Add nojekyll to disable dynamic build"
+git push
