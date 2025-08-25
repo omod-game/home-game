@@ -1,0 +1,66 @@
+/* 全体 */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+}
+
+/* タイトル画面 */
+.centurycyclememoria-title-screen {
+  background: url("centurycyclememoriacollection.jpg") no-repeat center center;
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* 下寄せ配置 */
+  align-items: center;
+  text-align: center;
+  color: white;
+  position: relative;
+}
+
+.centurycyclememoria-overlay {
+  background: rgba(0,0,0,0.4); /* 半透明オーバーレイ */
+  width: 100%;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.centurycyclememoria-game-title {
+  font-size: 3em;
+  margin: 0 0 20px 0;
+}
+
+.centurycyclememoria-start-button {
+  font-size: 1.5em;
+  padding: 12px 40px;
+  border: none;
+  border-radius: 8px;
+  background: #ffffffcc;
+  color: #333;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.centurycyclememoria-start-button:hover {
+  background: #ffddddcc;
+}
+
+/* ゲーム画面 */
+#centurycyclememoria-game-container {
+  padding: 20px;
+}
+
+#centurycyclememoria-game-text {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+#centurycyclememoria-game-choices button {
+  display: block;
+  margin: 10px 0;
+  padding: 10px 20px;
+  font-size: 1em;
+}
