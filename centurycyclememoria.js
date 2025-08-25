@@ -24,3 +24,26 @@ function showchoices(choices) {
     container.appendChild(btn);
   });
 }
+function setBackground(newSrc) {
+  if (bgImage.src.includes(newSrc)) return; // 同じ画像なら無視
+
+  bgImage.style.opacity = 0; // フェードアウト開始
+  setTimeout(() => {
+    bgImage.src = newSrc;
+    bgImage.onload = () => {
+      bgImage.style.opacity = 1; // フェードイン
+    };
+  }, 500); // 0.5秒後に切り替え
+}
+
+function showLine() {
+  const line = scenario[currentLine];
+  textElement.textContent = line.text;
+  if (line.bg) setBackground(line.bg);
+  if (line.char) {
+    charImage.style.display = "block";
+    charImage.src = line.char;
+  } else {
+    charImage.style.display = "none";
+  }
+}
