@@ -33,17 +33,19 @@
     const charImage = document.getElementById("centurycyclememoria-char-image");
 
     // シナリオ（最初の心情描写＋未来登場）
-    const scenario = [
-      { text: "──四月、転校初日の朝。", bg: "ccm_classroom_bg.jpg", char: "" },
-      { text: "教室に入ると、ざわめきと新しい匂いが押し寄せてきた。", bg: "ccm_classroom_bg.jpg", char: "" },
-      { text: "「……ここが、俺の新しい日常か」", bg: "ccm_classroom_bg.jpg", char: "" },
-      { text: "緊張で胸が重い。それでも、期待に似たざわつきがどこか奥にある。", bg: "ccm_classroom_bg.jpg", char: "" },
-      { text: "黒板には『席替え』と書かれていた。", bg: "ccm_classroom_bg.jpg", char: "" },
-      { text: "残った席は──桜井未来の隣だった。", bg: "ccm_classroom_bg.jpg", char: "" },
-      { text: "未来が振り返り、ぱっと咲くように笑った。", bg: "ccm_classroom_bg.jpg", char: "ccm_miku_intro.png" },
-      { text: "未来「よろしくね！」", bg: "ccm_classroom_bg.jpg", char: "ccm_miku_intro.png" },
-      { text: "偶然のようでいて、なぜかずっと前から決まっていた気がした。", bg: "ccm_dream_overlay.png", char: "" }
-    ];
+   const scenario = [
+  { text: "──四月、転校初日の朝。", bg: "ccm_classroom_bg.jpg", char: "" },
+  { text: "教室に入ると、ざわめきと新しい匂いが押し寄せてきた。", bg: "ccm_classroom_bg.jpg", char: "" },
+  { text: "「……ここが、俺の新しい日常か」", bg: "ccm_classroom_bg.jpg", char: "" },
+  { text: "緊張で胸が重い。それでも、期待に似たざわつきがどこか奥にある。", bg: "ccm_classroom_bg.jpg", char: "" },
+  { text: "黒板には『席替え』と書かれていた。", bg: "ccm_classroom_bg.jpg", char: "" },
+  { text: "残った席は──桜井未来の隣だった。", bg: "ccm_classroom_bg.jpg", char: "" },
+  // 🎉 ここで背景が切り替わる
+  { text: "未来が振り返り、ぱっと咲くように笑った。", bg: "ccm_miku_smile_bg.jpg", char: "" },
+  { text: "未来「よろしくね！」", bg: "ccm_miku_smile_bg.jpg", char: "" },
+  { text: "偶然のようでいて、なぜかずっと前から決まっていた気がした。", bg: "ccm_dream_overlay.png", char: "" }
+];
+
 
     let currentLine = 0;
 
