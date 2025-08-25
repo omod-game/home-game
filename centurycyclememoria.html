@@ -6,15 +6,23 @@
   <link rel="stylesheet" href="centurycyclememoria.css">
 </head>
 <body>
+  <!-- タイトル画面 -->
   <div id="centurycyclememoria-start-screen">
     <div class="centurycyclememoria-title">世紀輪廻メモリア</div>
-    <img src="centurycyclememoriacollection.jpg" alt="タイトル画像" class="centurycyclememoria-title-image">
-    <button id="centurycyclememoria-start-button">はじめる</button>
+    <div class="centurycyclememoria-subtitle">
+      春の朝。偶然の隣席が、百年をめぐる約束を呼び覚ます──。
+    </div>
+    <img src="images/centurycyclememoriacollection.jpg" 
+         alt="タイトル画像" 
+         class="centurycyclememoria-title-image">
+    <button id="centurycyclememoria-start-button">▶ はじめる</button>
   </div>
 
+  <!-- ゲーム画面 -->
   <div id="centurycyclememoria-game-screen" style="display:none;">
     <div id="centurycyclememoria-background">
       <img id="centurycyclememoria-bg-image" src="" alt="背景">
+      <div id="centurycyclememoria-overlay"></div>
     </div>
     <div id="centurycyclememoria-character">
       <img id="centurycyclememoria-char-image" src="" alt="キャラクター">
@@ -24,58 +32,6 @@
     </div>
   </div>
 
-  <script>
-    const startButton = document.getElementById("centurycyclememoria-start-button");
-    const startScreen = document.getElementById("centurycyclememoria-start-screen");
-    const gameScreen = document.getElementById("centurycyclememoria-game-screen");
-    const textElement = document.getElementById("centurycyclememoria-text");
-    const bgImage = document.getElementById("centurycyclememoria-bg-image");
-    const charImage = document.getElementById("centurycyclememoria-char-image");
-
-    // シナリオ（最初の心情描写＋未来登場）
-   const scenario = [
-  { text: "──四月、転校初日の朝。", bg: "ccm_classroom_bg.jpg", char: "" },
-  { text: "教室に入ると、ざわめきと新しい匂いが押し寄せてきた。", bg: "ccm_classroom_bg.jpg", char: "" },
-  { text: "「……ここが、俺の新しい日常か」", bg: "ccm_classroom_bg.jpg", char: "" },
-  { text: "緊張で胸が重い。それでも、期待に似たざわつきがどこか奥にある。", bg: "ccm_classroom_bg.jpg", char: "" },
-  { text: "黒板には『席替え』と書かれていた。", bg: "ccm_classroom_bg.jpg", char: "" },
-  { text: "残った席は──桜井未来の隣だった。", bg: "ccm_classroom_bg.jpg", char: "" },
-  // 🎉 ここで背景が切り替わる
-  { text: "未来が振り返り、ぱっと咲くように笑った。", bg: "ccm_miku_smile_bg.jpg", char: "" },
-  { text: "未来「よろしくね！」", bg: "ccm_miku_smile_bg.jpg", char: "" },
-  { text: "偶然のようでいて、なぜかずっと前から決まっていた気がした。", bg: "ccm_dream_overlay.png", char: "" }
-];
-
-
-    let currentLine = 0;
-
-    function showLine() {
-      const line = scenario[currentLine];
-      textElement.textContent = line.text;
-      if (line.bg) bgImage.src = line.bg;
-      if (line.char) {
-        charImage.style.display = "block";
-        charImage.src = line.char;
-      } else {
-        charImage.style.display = "none";
-      }
-    }
-
-    gameScreen.addEventListener("click", () => {
-      if (currentLine < scenario.length - 1) {
-        currentLine++;
-        showLine();
-      } else {
-        textElement.textContent = "（次のシナリオへ…）";
-      }
-    });
-
-    startButton.addEventListener("click", () => {
-      startScreen.style.display = "none";
-      gameScreen.style.display = "block";
-      currentLine = 0;
-      showLine();
-    });
-  </script>
+  <script src="centurycyclememoria.js"></script>
 </body>
 </html>
