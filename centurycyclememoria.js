@@ -38,7 +38,7 @@ const scenario = [
   { text: "窓の外、春風に舞う桜の花びらが、未来の笑顔を一層まぶしくしていた。", bg: "ccm_classroom_sakura.jpg" },
   { text: "未来「ねえ、もしよかったら──放課後、学校案内してあげる！」", bg: "ccm_classroom_sakura.jpg" },
   { text: "唐突な誘いに、胸の奥が熱くなる。", bg: "ccm_classroom_sakura.jpg" },
-  { text: "まるで、ずっと前から待ち望んでいた約束のように。", bg: "ccm_dream_overlay.png", overlay: true }
+  { text: "まるで、ずっと前から待ち望んでいた約束のように。", bg: "ccm_dream_overlay.jpg", overlay: true }
 ];
 
 let currentLine = 0;
