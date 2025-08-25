@@ -11,15 +11,15 @@ const pullSound = new Audio('sounds/pull.mp3');
 // 鼻毛生成
 function generateNoseHairs() {
     noseHairs = [];
-    const numHairs = 15; // 鼻毛の本数
+    const numHairs = 15;
     for (let i = 0; i < numHairs; i++) {
         noseHairs.push({
             x: 180 + Math.random() * 40,
             y: 180 + Math.random() * 20,
             length: 20 + Math.random() * 15,
-            angle: Math.random() * Math.PI/6 - Math.PI/12, // 初期角度
-            swayDir: Math.random() > 0.5 ? 1 : -1,         // 揺れ方向
-            swaySpeed: 0.02 + Math.random() * 0.02,       // 揺れ速度
+            angle: Math.random() * Math.PI/6 - Math.PI/12,
+            swayDir: Math.random() > 0.5 ? 1 : -1,
+            swaySpeed: 0.02 + Math.random() * 0.02,
             pulled: false,
             pullProgress: 0
         });
@@ -67,7 +67,7 @@ function draw() {
         ctx.save();
         ctx.translate(hair.x, hair.y);
 
-        // 鼻毛揺れアニメ
+        // 鼻毛揺れ
         if (!hair.pulled) {
             hair.angle += hair.swaySpeed * hair.swayDir;
             if (Math.abs(hair.angle) > Math.PI/6) hair.swayDir *= -1;
@@ -105,11 +105,10 @@ canvas.addEventListener('click', (e) => {
             if (mx > hx - 5 && mx < hx + 5 && my > hy - hair.length && my < hy) {
                 hair.pulled = true;
                 pullSound.currentTime = 0;
-                pullSound.play();  // 音再生
+                pullSound.play();
                 score++;
                 document.getElementById('score').textContent = `スコア: ${score}`;
 
-                // バレる判定
                 if (!eyeOpen) {
                     setTimeout(() => {
                         alert('おじさんにバレた！ゲームオーバー');
