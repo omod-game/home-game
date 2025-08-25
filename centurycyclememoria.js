@@ -30,7 +30,15 @@ const scenario = [
   { text: "残った席は──桜井未来の隣だった。", bg: "ccm_classroom_bg.jpg" },
   { text: "未来が振り返り、ぱっと咲くように笑った。", bg: "ccm_miku_smile.jpg" },
   { text: "未来「よろしくね！」", bg: "ccm_miku_smile.jpg" },
-  { text: "偶然のようでいて、なぜかずっと前から決まっていた気がした。", bg: "ccm_miku_dream.jpg", overlay: true }
+  { text: "偶然のようでいて、なぜかずっと前から決まっていた気がした。", bg: "ccm_miku_dream.jpg", overlay: true },
+  { text: "未来「転校生なんだよね？ どこから来たの？」", bg: "ccm_classroom_bg.jpg" },
+  { text: "「……ああ、ちょっと遠くから」", bg: "ccm_classroom_bg.jpg" },
+  { text: "未来「へえ！　なんだか楽しみだね。クラス替えもあったし、ちょうど新しいスタートだよ」", bg: "ccm_classroom_bg.jpg" },
+  { text: "その言葉に、不安が少しだけ和らいだ。", bg: "ccm_classroom_bg.jpg" },
+  { text: "窓の外、春風に舞う桜の花びらが、未来の笑顔を一層まぶしくしていた。", bg: "ccm_classroom_sakura.jpg" },
+  { text: "未来「ねえ、もしよかったら──放課後、学校案内してあげる！」", bg: "ccm_classroom_sakura.jpg" },
+  { text: "唐突な誘いに、胸の奥が熱くなる。", bg: "ccm_classroom_sakura.jpg" },
+  { text: "まるで、ずっと前から待ち望んでいた約束のように。", bg: "ccm_dream_overlay.png", overlay: true }
 ];
 
 let currentLine = 0;
