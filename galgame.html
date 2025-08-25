@@ -1,140 +1,141 @@
-// 世紀輪廻メモリア 開発用分岐テンプレート
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>世紀輪廻メモリア（仮）完全版</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-b from-purple-100 via-pink-100 to-yellow-100 min-h-screen flex flex-col items-center">
 
-// --- ゲーム状態管理 ---
+<header class="w-full bg-white shadow-md py-6 mb-6 rounded-b-3xl text-center">
+  <h1 class="text-4xl font-extrabold text-purple-700">🕰 世紀輪廻メモリア（仮）完全版 🕰</h1>
+  <p class="text-gray-600 mt-2 text-lg">転入生のあなたが体験する前世と今世の物語</p>
+</header>
+
+<main class="flex-1 w-full max-w-3xl px-4">
+  <div id="gameArea" class="bg-white rounded-3xl shadow-lg p-6 flex flex-col items-center">
+    <div id="background" class="w-full h-64 bg-gray-200 mb-4 flex items-center justify-center">
+      <span class="text-gray-500">背景画像はここに表示</span>
+    </div>
+
+    <div id="character" class="w-48 h-48 bg-gray-300 mb-4 flex items-center justify-center">
+      <span class="text-gray-500">キャラクター画像はここに表示</span>
+    </div>
+
+    <div id="text" class="text-gray-800 text-lg mb-6 text-center">ゲームスタートを押して物語を進めよう！</div>
+
+    <div id="choices" class="flex flex-col gap-4 w-full items-center"></div>
+
+    <button id="nextBtn" class="mt-4 bg-purple-500 hover:bg-purple-600 text-white font-bold px-6 py-3 rounded-2xl">ゲーム開始 ▶</button>
+  </div>
+</main>
+
+<footer class="w-full py-4 mt-8 bg-white text-center shadow-inner">
+  <p class="text-gray-500 text-sm">&copy; 2025 MiniGame Portal</p>
+</footer>
+
+<script>
+// ゲーム状態
 const GameState = {
-  chapter: 1,                // 現在の章
-  affection: {               // 好感度
-    Miku: 0,
-    Shizuka: 0,
-    Rena: 0
-  },
-  flags: {                   // フラグ管理
-    F_Miku_Help: false,
-    F_Library_Key: false,
-    F_Council_Pass: false,
-    F_Rooftop_Promise: false,
-    F_Forbidden_Tome: false,
-    F_Shrine_Access: false
-  },
-  BellShard: 0,              // 鐘の断片数
-  hiddenUnlocked: false      // 隠しルート解放
+  chapter: 1,
+  affection: { Miku: 0, Shizuka: 0, Rena: 0 },
+  flags: {},
+  BellShard: 0,
+  currentScene: 0,
+  route: null,
+  inRoute: false
 };
 
-// --- 選択肢定義 ---
-const Choices = {
-  commonChapter1: [
-    { label: "未来の部誌手伝い", affect: {Miku: 2}, flag: "F_Miku_Help" },
-    { label: "図書室で静の整理手伝い", affect: {Shizuka: 2}, flag: "F_Library_Key" },
-    { label: "生徒会の資料運び", affect: {Rena: 2}, flag: "F_Council_Pass" }
+// 台本（共通ルート→個別ルート→隠しルート）
+const scenes = {
+  common: [
+    {text:"第1章：転入と三つの扉。席替えで隣になったのは？",
+     choices:[
+       {label:"桜井 未来", next:"common2", affect:{Miku:1}, flag:"F_Miku_Help"},
+       {label:"黒川 静", next:"common2", affect:{Shizuka:1}, flag:"F_Library_Key"},
+       {label:"白石 玲奈", next:"common2", affect:{Rena:1}, flag:"F_Council_Pass"}
+     ]
+    },
+    {key:"common2", text:"放課後、どの活動に参加する？",
+     choices:[
+       {label:"未来の部誌手伝い", next:"common3", affect:{Miku:2}, flag:"F_Miku_Help"},
+       {label:"図書室で静の整理を手伝う", next:"common3", affect:{Shizuka:2}, flag:"F_Library_Key"},
+       {label:"生徒会の資料運びに協力", next:"common3", affect:{Rena:2}, flag:"F_Council_Pass"}
+     ]
+    },
+    {key:"common3", text:"夜、夢の中で零時の鐘の断片を見た。BellShard+1",
+     choices:[{label:"次へ", next:"common4"}],
+     BellShard:1
+    },
+    {key:"common4", text:"第2章：都市伝承と星祭。前夜祭に誰と回る？",
+     choices:[
+       {label:"未来と回る", next:"common5", affect:{Miku:2}},
+       {label:"静と回る", next:"common5", affect:{Shizuka:2}},
+       {label:"玲奈と回る", next:"common5", affect:{Rena:2}}
+     ]
+    },
+    {key:"common5", text:"校舎裏で無音の鐘の幻聴。BellShard+1",
+     choices:[{label:"次へ", next:null}],
+     BellShard:1
+    }
   ],
-  commonChapter2: [
-    { label: "未来と前夜祭", affect: {Miku: 2} },
-    { label: "静と前夜祭", affect: {Shizuka: 2} },
-    { label: "玲奈と前夜祭", affect: {Rena: 2} }
+
+  Miku: [
+    {text:"第1章：雨宿りの屋上。未来の口癖「きっと大丈夫」が聞こえる", choices:[{label:"次へ", next:"Miku2"}], flag:"F_Rooftop_Promise"},
+    {key:"Miku2", text:"写真部の暗室。現像された写真に二重写りが…", choices:[
+      {label:"真実を掘る", next:"Miku3", flag:"F_Photo_Truth"},
+      {label:"今を守る", next:"Miku3", flag:"F_Photo_Love"}
+    ], BellShard:1},
+    {key:"Miku3", text:"星祭の告白。鐘が鳴る寸前、夢の断片を口にすると未来の瞳が揺れる", choices:[
+      {label:"Good: 今を選ぶ", next:null},
+      {label:"Bitter: 真実を追う", next:null},
+      {label:"Bad: 儀礼阻害", next:null}
+    ]}
+  ],
+
+  Shizuka: [
+    {text:"禁書「世紀紋章」を発見。図書室隠し書架へ", choices:[{label:"次へ", next:"Shizuka2"}], flag:"F_Forbidden_Tome"},
+    {key:"Shizuka2", text:"地下資料庫。壁画に鐘の設計。BellShard+1", choices:[
+      {label:"静の独断を止める", next:"Shizuka3", flag:"F_Stop_Action"},
+      {label:"任せる", next:"Shizuka3", flag:"F_Allow_Action"}
+    ], BellShard:1},
+    {key:"Shizuka3", text:"静が前世の名を口にしかける", choices:[
+      {label:"Good: 禁書を閉じる", next:null},
+      {label:"Bitter: 真実開示", next:null},
+      {label:"Bad: 禁書開放→巻き戻し", next:null}
+    ]}
+  ],
+
+  Rena: [
+    {text:"儀礼の段取り。旧時計塔への同行", choices:[{label:"次へ", next:"Rena2"}], flag:"F_Shrine_Access"},
+    {key:"Rena2", text:"代償。鐘を鳴らす儀礼に個人的記憶の供出が必要。BellShard+1", choices:[
+      {label:"抜け道を探す", next:"Rena3", flag:"F_Shrine_Shortcut"},
+      {label:"正攻法で支える", next:"Rena3", flag:"F_Shrine_Normal"}
+    ], BellShard:1},
+    {key:"Rena3", text:"0:00の選択", choices:[
+      {label:"Good: 記憶を奪わず都市を守る", next:null},
+      {label:"Bitter: 記憶少し消える", next:null},
+      {label:"Bad: 儀礼失敗→巻き戻し", next:null}
+    ]}
+  ],
+
+  TrueRoute: [
+    {text:"隠し章：記憶の大聖堂。夢の人物が実体化。", choices:[{label:"次へ", next:"True2"}]},
+    {key:"True2", text:"鐘は忘却ではなく選択の装置だと告げる", choices:[
+      {label:"日常を守り輪廻を受け入れる（トゥルーB）", next:null},
+      {label:"全員の選択を鍵に輪廻停止（トゥルーA）", next:null}
+    ]}
   ]
-  // 各章・ルートの選択肢は同様に追加可能
 };
 
-// --- チャプター進行関数 ---
-function nextChapter() {
-  GameState.chapter += 1;
-  switch(GameState.chapter) {
-    case 2:
-      startChapter2();
-      break;
-    case 3:
-      startChapter3();
-      break;
-    default:
-      checkHiddenRoute();
-      break;
-  }
-}
-
-// --- 共通ルート第2章 ---
-function startChapter2() {
-  // ここで選択肢を表示
-  // 例: showChoices(Choices.commonChapter2);
-}
-
-// --- 共通ルート第3章（零時の囁き） ---
-function startChapter3() {
-  // 最大好感度ヒロインの判定
-  const maxAffection = Math.max(...Object.values(GameState.affection));
-  const candidates = Object.keys(GameState.affection).filter(
-    key => GameState.affection[key] === maxAffection
-  );
-  
-  // 同率の場合は選択肢を表示、単独なら自動ルート移行
-  if(candidates.length > 1) {
-    // showChoiceForTie(candidates);
+// シーン表示
+function showScene(routeName=null){
+  let scene;
+  if(GameState.inRoute){
+    scene = scenes[GameState.route][GameState.currentScene];
   } else {
-    // moveToRoute(candidates[0]);
+    scene = scenes.common[GameState.currentScene];
   }
-}
 
-// --- 個別ルート関数（例：未来ルート） ---
-function mikuRoute() {
-  // 章1：雨宿りの屋上
-  // setFlag('F_Rooftop_Promise');
-
-  // 章2：写真部暗室
-  // 選択：真実を掘る / 今を守る
-
-  // 章3：星祭の告白
-  // Good / Bitter / Bad の分岐
-}
-
-// --- 静ルート ---
-function shizukaRoute() {
-  // 章1：禁書「世紀紋章」
-  // 章2：地下資料庫
-  // 章3：現し世と記憶の境
-}
-
-// --- 玲奈ルート ---
-function renaRoute() {
-  // 章1：儀礼の段取り
-  // 章2：代償
-  // 章3：0:00の選択
-}
-
-// --- 隠しルート判定 ---
-function checkHiddenRoute() {
-  const goodOrBitterAll =
-    GameState.affection.Miku > 0 &&
-    GameState.affection.Shizuka > 0 &&
-    GameState.affection.Rena > 0 &&
-    GameState.BellShard >= 5;
-
-  const noBad = true; // 周回でBad踏まない場合
-  if(goodOrBitterAll && noBad) {
-    GameState.hiddenUnlocked = true;
-    startHiddenChapter();
-  }
-}
-
-// --- 隠し章 ---
-function startHiddenChapter() {
-  // 夢の人物登場
-  // 選択肢：
-  // 1. 日常を守り輪廻を受け入れる
-  // 2. 3人の選択総和で輪廻を停止
-}
-
-// --- フラグ設定関数 ---
-function setFlag(flagName) {
-  GameState.flags[flagName] = true;
-}
-
-// --- 好感度増加関数 ---
-function increaseAffection(character, value) {
-  if(GameState.affection[character] !== undefined) {
-    GameState.affection[character] += value;
-  }
-}
-
-// --- BellShard増加関数 ---
-function gainBellShard(amount) {
-  GameState.BellShard += amount;
-}
+  document.getElementById("text").inner
