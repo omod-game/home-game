@@ -99,12 +99,30 @@ body {
   display: none;
 }
 
+/* テキストボックス全体（下部固定） */
 #centurycyclememoria-textbox {
   position: absolute;
-  bottom: 0;
-  width: 100%;
-  background: rgba(0,0,0,0.6);
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%; /* 幅を少し広めに */
+  min-height: 140px;
+  background: rgba(0, 0, 0, 0.6); /* 半透明で背景が見える */
+  border: 2px solid #fff; /* 白い枠線 */
+  border-radius: 12px;
   padding: 20px;
-  font-size: 1.2em;
-  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* 左寄せにして自然に */
+  text-align: left;
+  color: #fff;
+  font-size: 20px;
+  line-height: 1.8;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+/* テキスト部分 */
+#centurycyclememoria-text {
+  margin: 0;
+  white-space: pre-line;
 }
