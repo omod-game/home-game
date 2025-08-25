@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>世紀輪廻メモリア</title>
+  <style>
+    body.CenturyCycleMemoriaBody {
+      margin: 0;
+      font-family: "游ゴシック", sans-serif;
+      background: #111;
+      color: white;
+    }
+
+    .CenturyCycleMemoriaTitleScreen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100vh;
+      padding-top: 5vh;
+      text-shadow: 2px 2px 4px #000;
+    }
+
+    .CenturyCycleMemoriaTitleScreen h1 {
+      margin-bottom: 20px;
+      background: rgba(0,0,0,0.5);
+      padding: 0.5em 1em;
+      border-radius: 8px;
+    }
+
+    .CenturyCycleMemoriaTitleScreen button {
+      margin-bottom: 20px;
+      padding: 0.8em 2em;
+      font-size: 1.2em;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .CenturyCycleMemoriaTitleImage {
+      width: 80%;
+      max-width: 960px;
+      aspect-ratio: 16/9;   /* 枠は16:9固定 */
+      overflow: hidden;
+      border: 4px solid #fff;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    }
+
+    .CenturyCycleMemoriaTitleImage img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* --- ゲーム本体ウィンドウ --- */
+    .CenturyCycleMemoriaGameWindow {
+      display: none;
+      flex-direction: column;
+      height: 100vh;
+      background: #000;
+    }
+
+    .CenturyCycleMemoriaTextBox {
+      background: rgba(0,0,0,0.7);
+      padding: 1em;
+      font-size: 1.1em;
+      line-height: 1.6em;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .CenturyCycleMemoriaChoiceBox {
+      position: absolute;
+      bottom: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .CenturyCycleMemoriaChoiceBox button {
+      background: rgba(255,255,255,0.9);
+      color: #000;
+      border: none;
+      padding: 0.6em 1.5em;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+  </style>
+</head>
+<body class="CenturyCycleMemoriaBody">
+  <!-- タイトル画面 -->
+  <div class="CenturyCycleMemoriaTitleScreen" id="CenturyCycleMemoriaTitleScreen">
+    <h1>世紀輪廻メモリア</h1>
+    <button onclick="CenturyCycleMemoriaStartGame()">はじめる</button>
+    <!-- タイトルCG -->
+    <div class="CenturyCycleMemoriaTitleImage">
+      <img src="CenturyCycleMemoriaCollection.jpg" alt="タイトルCG">
+    </div>
+  </div>
+
+  <!-- ゲーム本体 -->
+  <div class="CenturyCycleMemoriaGameWindow" id="CenturyCycleMemoriaGameWindow">
+    <div class="CenturyCycleMemoriaTextBox" id="CenturyCycleMemoriaTextBox"></div>
+    <div class="CenturyCycleMemoriaChoiceBox" id="CenturyCycleMemoriaChoiceBox"></div>
+  </div>
+
+  <script>
+    /* =====================
+       世紀輪廻メモリア 簡易デモ版
+       ===================== */
+    const CenturyCycleMemoriaScenes = [
+      { text: "4月、新しい街に転入してきた。", choices: [
+        { label: "桜井未来の部誌を手伝う", next: 1 },
+        { label: "図書室で黒川静を手伝う", next: 2 },
+        { label: "生徒会の資料を玲奈と運ぶ", next: 3 }
+      ]},
+      { text: "未来「きっと大丈夫！」", choices: [
+        { label: "次へ", next: 4 }
+      ]},
+      { text: "静は静かに微笑んだ。", choices: [
+        { label: "次へ", next: 4 }
+      ]},
+      { text: "玲奈「あなたも儀礼に関わる覚悟はある？」", choices: [
+        { label: "次へ", next: 4 }
+      ]},
+      { text: "夢の中で、鐘の音を聞いた気がした……", choices: [
+        { label: "タイトルに戻る", next: "title" }
+      ]},
+    ];
+
+    let CenturyCycleMemoriaIndex = 0;
+
+    function CenturyCycleMemoriaStartGame() {
+      document.getElementById("CenturyCycleMemoriaTitleScreen").style.display = "none";
+      document.getElementById("CenturyCycleMemoriaGameWindow").style.display = "flex";
+      CenturyCycleMemoriaIndex = 0;
+      CenturyCycleMemoriaShowScene();
+    }
+
+    function CenturyCycleMemoriaShowScene() {
+      const scene = CenturyCycleMemoriaScenes[CenturyCycleMemoriaIndex];
+      document.getElementById("CenturyCycleMemoriaTextBox").innerText = scene.text;
+      const choiceBox = document.getElementById("CenturyCycleMemoriaChoiceBox");
+      choiceBox.innerHTML = "";
+      scene.choices.forEach(c => {
+        const btn = document.createElement("button");
+        btn.innerText = c.label;
+        btn.onclick = () => {
+          if (c.next === "title") {
+            CenturyCycleMemoriaGoTitle();
+          } else {
+            CenturyCycleMemoriaIndex = c.next;
+            CenturyCycleMemoriaShowScene();
+          }
+        };
+        choiceBox.appendChild(btn);
+      });
+    }
+
+    function CenturyCycleMemoriaGoTitle() {
+      document.getElementById("CenturyCycleMemoriaGameWindow").style.display = "none";
+      document.getElementById("CenturyCycleMemoriaTitleScreen").style.display = "flex";
+    }
+  </script>
+</body>
+</html>
