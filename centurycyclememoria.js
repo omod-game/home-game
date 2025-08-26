@@ -9,19 +9,14 @@ const subtitle = document.querySelector(".centurycyclememoria-subtitle");
 
 // タイトル画面の演出
 window.addEventListener("load", () => {
-  const subtitle = document.querySelector(".centurycyclememoria-subtitle");
-  const startButton = document.getElementById("centurycyclememoria-start-button");
-
+// タイトル画面の演出
+window.addEventListener("load", () => {
   // サブタイトルをフェードイン
-  subtitle.style.opacity = 0; // 初期値
-  subtitle.style.transition = "opacity 1s";
-
   setTimeout(() => {
     subtitle.style.opacity = 1;
   }, 500);
 
   // サブタイトル表示後にボタンを出す
-  startButton.style.display = "none"; // 初期非表示
   setTimeout(() => {
     startButton.style.display = "block";
   }, 4000);
