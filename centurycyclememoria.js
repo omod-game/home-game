@@ -41,13 +41,12 @@ const scenario = [
   { text: "窓の外、春風に舞う桜の花びらが、未来の笑顔を一層まぶしくしていた。", bg: "ccm_classroom_sakura.jpg" },
   { text: "未来「ねえ、もしよかったら──放課後、学校案内してあげる！」", bg: "ccm_classroom_sakura.jpg" },
   { text: "唐突な誘いに、胸の奥が熱くなる。", bg: "ccm_classroom_sakura.jpg" },
-  { text: "まるで、ずっと前から待ち望んでいた約束のように。", bg: "ccm_dream_overlay.jpg", overlay: true }
+  { text: "まるで、ずっと前から待ち望んでいた約束のように。", bg: "ccm_dream_overlay.jpg", overlay: true },
   { text: "未来に連れられて、静かな図書室へと足を踏み入れる。", bg: "ccm_library_inside.jpg", char: "" },
   { text: "本の匂いと、窓から差す夕陽の柔らかな光。時間が止まったような空気だった。", bg: "ccm_library_inside.jpg", char: "" },
   { text: "未来「ここには、よく静がいるんだよ」", bg: "ccm_library_inside.jpg", char: "" },
   { text: "未来「本に夢中になってて、声をかけても気づかないことがあるくらい」", bg: "ccm_library_inside.jpg", char: "" },
   { text: "……静かに本をめくる姿が、容易に想像できた。", bg: "ccm_library_inside.jpg", char: "" },
-
   { text: "図書室を出て、次に案内されたのは生徒会室。", bg: "ccm_council_door.jpg", char: "" },
   { text: "未来「ここは玲奈がよくいるところ。生徒会長なんだ」", bg: "ccm_council_door.jpg", char: "" },
   { text: "扉の奥からは、誰かが書類をめくる音がかすかに聞こえた。", bg: "ccm_council_door.jpg", char: "" },
