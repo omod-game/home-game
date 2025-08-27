@@ -14,6 +14,7 @@
     }
     .overlay {
       background: rgba(0, 0, 0, 0.5);
+      min-height: 100vh; /* 全画面に広げる */
     }
     .btn {
       background: linear-gradient(135deg, #ff7fbf, #7f7fff);
@@ -34,7 +35,8 @@
      crossorigin="anonymous"></script>
   -->
 </head>
-<body class="overlay">
+<body>
+  <div class="overlay">
 
   <!-- ヘッダー -->
   <header class="p-6 text-center">
@@ -115,6 +117,6 @@
   <footer class="text-center py-6 text-sm opacity-70">
     © 2025 世紀輪廻メモリア | All Rights Reserved.
   </footer>
-
+  </div>
 </body>
 </html>
