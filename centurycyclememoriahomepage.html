@@ -2,121 +2,177 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <title>世紀輪廻メモリア</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>世紀輪廻メモリア - 公式サイト</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="centurycyclememoria.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon-192.png" type="image/png">
+  <meta name="theme-color" content="#000000">
   <style>
     body {
-      background: url('bg_moon_sakura.jpg') no-repeat center center fixed;
-      background-size: cover;
+      margin: 0;
+      font-family: "Noto Serif JP", serif;
       color: #fff;
-      font-family: 'Hiragino Maru Gothic ProN', 'Yu Gothic', sans-serif;
+      background: url("tsukiyo-sakura.jpg") no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+      min-height: 100vh;
     }
-    .overlay {
-      background: rgba(0, 0, 0, 0.5);
-      min-height: 100vh; /* 全画面に広げる */
+
+    /* 背景の黒透過レイヤー */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: -1;
     }
-    .btn {
-      background: linear-gradient(135deg, #ff7fbf, #7f7fff);
-      padding: 10px 20px;
-      border-radius: 9999px;
-      font-weight: bold;
-      color: white;
-      display: inline-block;
-      transition: 0.3s;
+
+    /* ヘッダー */
+    header {
+      text-align: center;
+      padding: 3rem 1rem 2rem;
     }
-    .btn:hover {
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    header p {
       opacity: 0.85;
     }
+
+    /* ナビゲーション（右上固定） */
+    nav {
+      position: fixed;
+      top: 1rem;
+      right: 1.5rem;
+      background: rgba(0,0,0,0.45);
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.9rem;
+    }
+    nav a {
+      margin: 0 0.4rem;
+      color: #fff;
+      text-decoration: none;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* セクション */
+    section {
+      text-align: center;
+      padding: 3rem 1rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    section p {
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    /* ボタン */
+    .btn {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      padding: 0.8rem 2rem;
+      border-radius: 9999px;
+      font-size: 1.1rem;
+      color: #fff;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    /* スポンサーリンク */
+    .sponsor {
+      text-align: center;
+      padding: 2rem 1rem;
+      opacity: 0.85;
+    }
+    .sponsor h2 {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+    .sponsor .ad-box {
+      background: rgba(255,255,255,0.08);
+      padding: 1rem;
+      border-radius: 10px;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      padding: 2rem 1rem;
+      opacity: 0.7;
+    }
   </style>
-  <!-- Google AdSense スクリプト（実際のコードをAdSense管理画面から取得してください） -->
-  <!--
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR-CLIENT-ID"
-     crossorigin="anonymous"></script>
-  -->
 </head>
 <body>
-  <div class="overlay">
-
-  <!-- ヘッダー -->
-  <header class="p-6 text-center">
-    <h1 class="text-4xl font-bold mb-2">世紀輪廻メモリア</h1>
-    <p class="text-lg opacity-80">──記憶と輪廻をめぐる、幻想の物語</p>
-  </header>
-
   <!-- ナビゲーション -->
-  <nav class="text-center mb-6">
-    <a href="index.html" class="mx-2 hover:underline">トップ</a>
-    <a href="characters.html" class="mx-2 hover:underline">キャラクター</a>
-    <a href="blog.html" class="mx-2 hover:underline">ブログ</a>
-    <a href="privacy.html" class="mx-2 hover:underline">プライバシーポリシー</a>
-    <a href="contact.html" class="mx-2 hover:underline">お問い合わせ</a>
-    <a href="profile.html" class="mx-2 hover:underline">プロフィール</a>
+  <nav>
+    <a href="centurycyclememoriahomepage.html">トップ</a>
+    <a href="characters.html">キャラクター</a>
+    <a href="blog.html">ブログ</a>
+    <a href="privacy.html">プライバシーポリシー</a>
+    <a href="contact.html">お問い合わせ</a>
+    <a href="profile.html">プロフィール</a>
   </nav>
 
-  <!-- メインビジュアル -->
-  <section class="text-center py-12">
-    <h2 class="text-3xl font-semibold mb-4">🌸 輪廻と記憶の物語へようこそ</h2>
-    <p class="max-w-2xl mx-auto mb-6">
-      このサイトは、ビジュアルノベル『世紀輪廻メモリア』の公式ページです。  
-      月夜に舞う桜と共に、幻想的な物語の世界を体験してください。
-    </p>
-    <a href="game.html" class="btn">▶ 運命の始まりへ</a>
-    <p class="mt-2 text-sm opacity-80">月夜に舞う桜とともに、物語は動き出す</p>
+  <!-- ヘッダー -->
+  <header>
+    <h1>世紀輪廻メモリア</h1>
+    <p>──記憶と輪廻をめぐる、幻想の物語</p>
+  </header>
 
+  <!-- メインビジュアル -->
+  <section>
+    <h2>🌸 輪廻と記憶の物語へようこそ</h2>
+    <p>
+      月夜に舞う桜の下、静かに始まるひとつの出会い。<br>
+      それはやがて、百年をめぐる約束を呼び覚ます──。
+    </p>
+    <a href="centurycyclememoria.html" class="btn">▶ 運命の始まりへ</a>
+    <p class="mt-2 text-sm opacity-80">月夜に舞う桜とともに、物語は動き出す</p>
   </section>
 
-  <!-- 広告（トップ下部・レスポンシブ） -->
-  <section class="max-w-3xl mx-auto text-center py-8 px-4">
-    <h2 class="text-xl mb-4">スポンサーリンク</h2>
-    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
-      <!-- Google AdSense レスポンシブ広告 -->
+  <!-- ストーリー紹介 -->
+  <section>
+    <h2>物語</h2>
+    <p>
+      春の朝。偶然の隣席から始まった出会いは、<br>
+      遠い記憶と、忘れられた約束を呼び起こす。<br>
+      ――そして物語は、百年を越えて巡り続ける。
+    </p>
+  </section>
+
+  <!-- スポンサーリンク -->
+  <section class="sponsor">
+    <h2>スポンサーリンク</h2>
+    <div class="ad-box">
+      <!-- Google広告コードをここに -->
       <ins class="adsbygoogle"
-          style="display:block"
-          data-ad-client="YOUR-CLIENT-ID"
-          data-ad-slot="1234567890"
-          data-ad-format="auto"
-          data-full-width-responsive="true"></ins>
+           style="display:block"
+           data-ad-client="YOUR-CLIENT-ID"
+           data-ad-slot="1234567890"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
       <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
       </script>
     </div>
   </section>
 
-  <!-- ストーリー紹介 -->
-  <section class="max-w-3xl mx-auto text-center py-12 px-4">
-    <h2 class="text-2xl font-semibold mb-4">ストーリー</h2>
-    <p>
-      四月、転校初日の朝。  
-      出会いは偶然のようでいて、ずっと前から決まっていたような必然──。  
-      桜舞う校庭、静かな図書室、そして生徒会室。  
-      記憶と輪廻が交錯する物語が、今、始まる。
-    </p>
-  </section>
-
-  <!-- キャラクター紹介（未来だけ） -->
-  <section class="max-w-4xl mx-auto text-center py-12 px-4">
-    <h2 class="text-2xl font-semibold mb-6">キャラクター紹介</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-      <div>
-        <img src="char_mirai.png" alt="未来" class="rounded-xl shadow-lg mx-auto">
-      </div>
-      <div class="text-left">
-        <h3 class="text-xl font-bold mb-2">未来</h3>
-        <p class="mb-4">
-          明るく、クラスのムードメーカー的存在。  
-          主人公を校内に案内し、物語の最初の扉を開く存在となる。  
-          春風に舞う桜のように、どこか切ない笑顔を見せることも……。
-        </p>
-        <a href="characters.html" class="btn">▶ 一覧を見る</a>
-      </div>
-    </div>
-  </section>
-
   <!-- フッター -->
-  <footer class="text-center py-6 text-sm opacity-70">
+  <footer>
     © 2025 世紀輪廻メモリア | All Rights Reserved.
   </footer>
-  </div>
 </body>
 </html>
