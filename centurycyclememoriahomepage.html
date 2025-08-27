@@ -3,96 +3,96 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>世紀輪廻メモリア - 公式ゲームページ</title>
+  <title>世紀輪廻メモリア - 公式サイト</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: url('bg_moon_sakura.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      font-family: 'Hiragino Maru Gothic ProN', 'Yu Gothic', sans-serif;
+    }
+    .overlay {
+      background: rgba(0, 0, 0, 0.5);
+    }
+    .btn {
+      background: linear-gradient(135deg, #ff7fbf, #7f7fff);
+      padding: 10px 20px;
+      border-radius: 9999px;
+      font-weight: bold;
+      color: white;
+      display: inline-block;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      opacity: 0.85;
+    }
+  </style>
+  <!-- Google AdSense スクリプト（実際のコードをAdSense管理画面から取得してください） -->
+  <!--
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR-CLIENT-ID"
+     crossorigin="anonymous"></script>
+  -->
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="overlay">
 
   <!-- ヘッダー -->
-  <header class="bg-purple-700 text-white shadow-md sticky top-0 z-50">
-    <div class="container mx-auto flex justify-between items-center p-4">
-      <h1 class="text-2xl font-bold">世紀輪廻メモリア</h1>
-      <nav>
-        <a href="index.html" class="mx-2 hover:underline">トップ</a>
-        <a href="game.html" class="mx-2 hover:underline">ゲーム</a>
-        <a href="blog.html" class="mx-2 hover:underline">ブログ</a>
-        <a href="privacy.html" class="mx-2 hover:underline">プライバシーポリシー</a>
-        <a href="contact.html" class="mx-2 hover:underline">お問い合わせ</a>
-        <a href="profile.html" class="mx-2 hover:underline">プロフィール</a>
-      </nav>
-    </div>
+  <header class="p-6 text-center">
+    <h1 class="text-4xl font-bold mb-2">世紀輪廻メモリア</h1>
+    <p class="text-lg opacity-80">──記憶と輪廻をめぐる、幻想の物語</p>
   </header>
 
-  <!-- メイン -->
-  <main class="container mx-auto py-8 space-y-12">
+  <!-- ナビゲーション -->
+  <nav class="text-center mb-6">
+    <a href="index.html" class="mx-2 hover:underline">トップ</a>
+    <a href="game.html" class="mx-2 hover:underline">ゲーム</a>
+    <a href="blog.html" class="mx-2 hover:underline">ブログ</a>
+    <a href="privacy.html" class="mx-2 hover:underline">プライバシーポリシー</a>
+    <a href="contact.html" class="mx-2 hover:underline">お問い合わせ</a>
+    <a href="profile.html" class="mx-2 hover:underline">プロフィール</a>
+  </nav>
 
-    <!-- ゲーム概要 -->
-    <section class="bg-white p-6 rounded-lg shadow-md text-center">
-      <h2 class="text-3xl font-bold mb-4">ゲーム概要</h2>
-      <p class="text-lg text-gray-600 leading-relaxed">
-        <strong>「世紀輪廻メモリア」</strong>は、<br>
-        百年をめぐる記憶と約束をテーマにしたシミュレーションゲームです。<br>
-        学園での出会い、都市伝承、そして前世の記憶が交差する──。<br>
-        あなたの選択が、物語の結末を変えていきます。
-      </p>
-      <div class="mt-6">
-        <a href="centurycyclememoria.html" class="px-6 py-3 bg-purple-600 text-white rounded-lg shadow hover:bg-purple-800">
-          ▶ ゲームをプレイする
-        </a>
-      </div>
-    </section>
+  <!-- メインビジュアル -->
+  <section class="text-center py-12">
+    <h2 class="text-3xl font-semibold mb-4">🌸 輪廻と記憶の物語へようこそ</h2>
+    <p class="max-w-2xl mx-auto mb-6">
+      このサイトは、ビジュアルノベル『世紀輪廻メモリア』の公式ページです。  
+      月夜に舞う桜と共に、幻想的な物語の世界を体験してください。
+    </p>
+    <a href="game.html" class="btn">▶ ゲームを始める</a>
+  </section>
 
-    <!-- キャラクター紹介 -->
-    <section class="bg-white p-6 rounded-lg shadow-md">
-      <h2 class="text-2xl font-bold mb-6 text-center">キャラクター紹介</h2>
-      <div class="grid md:grid-cols-3 gap-6 text-center">
+  <!-- 広告（トップ下部・レスポンシブ） -->
+  <section class="max-w-3xl mx-auto text-center py-8 px-4">
+    <h2 class="text-xl mb-4">スポンサーリンク</h2>
+    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+      <!-- Google AdSense レスポンシブ広告 -->
+      <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="YOUR-CLIENT-ID"
+          data-ad-slot="1234567890"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+  </section>
 
-        <div class="p-4 border rounded-lg shadow-sm">
-          <img src="img/mirai.jpg" alt="未来" class="mx-auto mb-4 rounded-lg">
-          <h3 class="text-xl font-semibold">桜井 未来</h3>
-          <p class="text-gray-600 text-sm mt-2">文芸部所属。明るくおっとりした雰囲気だが、夢に導かれるように主人公へ心を寄せる。</p>
-        </div>
-
-        <div class="p-4 border rounded-lg shadow-sm">
-          <img src="img/shizuka.jpg" alt="静" class="mx-auto mb-4 rounded-lg">
-          <h3 class="text-xl font-semibold">綾瀬 静</h3>
-          <p class="text-gray-600 text-sm mt-2">無口で冷静な図書委員。過去の記憶を探しているかのように古書を読み漁っている。</p>
-        </div>
-
-        <div class="p-4 border rounded-lg shadow-sm">
-          <img src="img/reina.jpg" alt="玲奈" class="mx-auto mb-4 rounded-lg">
-          <h3 class="text-xl font-semibold">白石 玲奈</h3>
-          <p class="text-gray-600 text-sm mt-2">生徒会役員。完璧主義だが、時折ふと見せる寂しげな表情に隠された秘密がある。</p>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- スクリーンショット（ダミー） -->
-    <section class="bg-white p-6 rounded-lg shadow-md text-center">
-      <h2 class="text-2xl font-bold mb-4">ゲーム画面</h2>
-      <p class="text-gray-600 mb-6">※開発中の画面です。今後更新予定。</p>
-      <div class="grid md:grid-cols-2 gap-6">
-        <img src="img/screen1.jpg" alt="スクリーンショット1" class="rounded-lg shadow">
-        <img src="img/screen2.jpg" alt="スクリーンショット2" class="rounded-lg shadow">
-      </div>
-    </section>
-
-    <!-- 最新情報 -->
-    <section class="bg-white p-6 rounded-lg shadow-md">
-      <h2 class="text-2xl font-bold mb-4">最新情報</h2>
-      <ul class="list-disc list-inside space-y-2 text-gray-700">
-        <li>2025/08/20　公式ページを公開しました。</li>
-        <li>2025/09/01　第1章体験版をアップデート予定。</li>
-        <li>2025/10/01　キャラクタービジュアルを追加予定。</li>
-      </ul>
-    </section>
-
-  </main>
+  <!-- ストーリー紹介 -->
+  <section class="max-w-3xl mx-auto text-center py-12 px-4">
+    <h2 class="text-2xl font-semibold mb-4">ストーリー</h2>
+    <p>
+      四月、転校初日の朝。  
+      出会いは偶然のようでいて、ずっと前から決まっていたような必然──。  
+      桜舞う校庭、静かな図書室、そして生徒会室。  
+      記憶と輪廻が交錯する物語が、今、始まる。
+    </p>
+  </section>
 
   <!-- フッター -->
-  <footer class="bg-purple-700 text-white text-center py-4 mt-12">
-    <p>&copy; 2025 世紀輪廻メモリア運営</p>
+  <footer class="text-center py-6 text-sm opacity-70">
+    © 2025 世紀輪廻メモリア | All Rights Reserved.
   </footer>
 
 </body>
