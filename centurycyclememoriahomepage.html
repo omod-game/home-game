@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>世紀輪廻メモリア公式サイト</title>
+  <title>世紀輪廻メモリア - 公式ゲームページ</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100 text-gray-800">
 
   <!-- ヘッダー -->
-  <header class="bg-purple-700 text-white shadow-md">
+  <header class="bg-purple-700 text-white shadow-md sticky top-0 z-50">
     <div class="container mx-auto flex justify-between items-center p-4">
       <h1 class="text-2xl font-bold">世紀輪廻メモリア</h1>
       <nav>
@@ -20,34 +20,74 @@
         <a href="contact.html" class="mx-2 hover:underline">お問い合わせ</a>
         <a href="profile.html" class="mx-2 hover:underline">プロフィール</a>
       </nav>
-
     </div>
   </header>
 
   <!-- メイン -->
-  <main class="container mx-auto py-8">
-    <!-- トップ紹介 -->
-    <section class="text-center mb-12">
-      <h2 class="text-3xl font-bold mb-4">ようこそ「世紀輪廻メモリア」へ</h2>
-      <p class="text-lg text-gray-600">AIと共に制作したシミュレーションゲームの公式サイトです。<br>
-        開発ブログやアップデート情報も掲載しています。</p>
+  <main class="container mx-auto py-8 space-y-12">
+
+    <!-- ゲーム概要 -->
+    <section class="bg-white p-6 rounded-lg shadow-md text-center">
+      <h2 class="text-3xl font-bold mb-4">ゲーム概要</h2>
+      <p class="text-lg text-gray-600 leading-relaxed">
+        <strong>「世紀輪廻メモリア」</strong>は、<br>
+        百年をめぐる記憶と約束をテーマにしたシミュレーションゲームです。<br>
+        学園での出会い、都市伝承、そして前世の記憶が交差する──。<br>
+        あなたの選択が、物語の結末を変えていきます。
+      </p>
       <div class="mt-6">
-        <a href="game.html" class="px-6 py-3 bg-purple-600 text-white rounded-lg shadow hover:bg-purple-800">▶ ゲームを始める</a>
+        <a href="play.html" class="px-6 py-3 bg-purple-600 text-white rounded-lg shadow hover:bg-purple-800">
+          ▶ ゲームをプレイする
+        </a>
       </div>
     </section>
 
-    <!-- ブログ一覧サンプル -->
+    <!-- キャラクター紹介 -->
     <section class="bg-white p-6 rounded-lg shadow-md">
-      <h3 class="text-2xl font-bold mb-4">最新ブログ記事</h3>
-      <ul class="space-y-3">
-        <li><a href="article1.html" class="text-purple-600 hover:underline">第1章を作るときに大変だったこと</a></li>
-        <li><a href="article2.html" class="text-purple-600 hover:underline">キャラクターデザインの裏話</a></li>
-        <li><a href="article3.html" class="text-purple-600 hover:underline">分岐シナリオの調整について</a></li>
-        <li><a href="article4.html" class="text-purple-600 hover:underline">隠しルートを仕込む工夫</a></li>
-        <li><a href="article5.html" class="text-purple-600 hover:underline">将来の展望（乙女ゲーム化？）</a></li>
-      </ul>
+      <h2 class="text-2xl font-bold mb-6 text-center">キャラクター紹介</h2>
+      <div class="grid md:grid-cols-3 gap-6 text-center">
 
+        <div class="p-4 border rounded-lg shadow-sm">
+          <img src="img/mirai.jpg" alt="未来" class="mx-auto mb-4 rounded-lg">
+          <h3 class="text-xl font-semibold">桜井 未来</h3>
+          <p class="text-gray-600 text-sm mt-2">文芸部所属。明るくおっとりした雰囲気だが、夢に導かれるように主人公へ心を寄せる。</p>
+        </div>
+
+        <div class="p-4 border rounded-lg shadow-sm">
+          <img src="img/shizuka.jpg" alt="静" class="mx-auto mb-4 rounded-lg">
+          <h3 class="text-xl font-semibold">綾瀬 静</h3>
+          <p class="text-gray-600 text-sm mt-2">無口で冷静な図書委員。過去の記憶を探しているかのように古書を読み漁っている。</p>
+        </div>
+
+        <div class="p-4 border rounded-lg shadow-sm">
+          <img src="img/reina.jpg" alt="玲奈" class="mx-auto mb-4 rounded-lg">
+          <h3 class="text-xl font-semibold">白石 玲奈</h3>
+          <p class="text-gray-600 text-sm mt-2">生徒会役員。完璧主義だが、時折ふと見せる寂しげな表情に隠された秘密がある。</p>
+        </div>
+
+      </div>
     </section>
+
+    <!-- スクリーンショット（ダミー） -->
+    <section class="bg-white p-6 rounded-lg shadow-md text-center">
+      <h2 class="text-2xl font-bold mb-4">ゲーム画面</h2>
+      <p class="text-gray-600 mb-6">※開発中の画面です。今後更新予定。</p>
+      <div class="grid md:grid-cols-2 gap-6">
+        <img src="img/screen1.jpg" alt="スクリーンショット1" class="rounded-lg shadow">
+        <img src="img/screen2.jpg" alt="スクリーンショット2" class="rounded-lg shadow">
+      </div>
+    </section>
+
+    <!-- 最新情報 -->
+    <section class="bg-white p-6 rounded-lg shadow-md">
+      <h2 class="text-2xl font-bold mb-4">最新情報</h2>
+      <ul class="list-disc list-inside space-y-2 text-gray-700">
+        <li>2025/08/20　公式ページを公開しました。</li>
+        <li>2025/09/01　第1章体験版をアップデート予定。</li>
+        <li>2025/10/01　キャラクタービジュアルを追加予定。</li>
+      </ul>
+    </section>
+
   </main>
 
   <!-- フッター -->
