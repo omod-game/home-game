@@ -13,7 +13,7 @@
       margin: 0;
       font-family: "Noto Serif JP", serif;
       color: #fff;
-      background: url("tsukiyo-sakura.jpg") no-repeat center center fixed;
+      background: url("bg_moon_sakura.jpg") no-repeat center center fixed;
       background-size: cover;
       position: relative;
       min-height: 100vh;
@@ -91,6 +91,28 @@
       background: rgba(255,255,255,0.3);
     }
 
+    /* キャラクター紹介 */
+    .character-intro {
+      background: rgba(0,0,0,0.35);
+      padding: 2rem 1rem;
+      border-radius: 15px;
+      margin-top: 2rem;
+    }
+    .character-name {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: #ff7fbf;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+      margin-bottom: 1rem;
+    }
+    .character-intro p {
+      line-height: 1.9;
+      font-size: 1rem;
+      margin: 0 auto;
+      max-width: 700px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+
     /* スポンサーリンク */
     .sponsor {
       text-align: center;
@@ -147,10 +169,24 @@
   <section>
     <h2>物語</h2>
     <p>
-      春の朝。偶然の隣席から始まった出会いは、<br>
-      遠い記憶と、忘れられた約束を呼び起こす。<br>
-      ――そして物語は、百年を越えて巡り続ける。
+      春風に揺れる桜の朝、ふとした隣席から始まる出会い。<br>
+      それは、時を越えて眠る記憶の扉を静かに叩く。<br>
+      <br>
+      百年を巡る約束は、再び月明かりの下で息を吹き返し、<br>
+      ふたりを運命の輪へと誘っていく──。
     </p>
+  </section>
+
+  <!-- キャラクター紹介（ホームにメインキャラ1人のみ） -->
+  <section class="character-intro">
+    <div class="character-name">桜井 未来</div>
+    <p>
+      明るく、クラスのムードメーカー的存在。<br>
+      主人公を校内に案内し、物語の最初の扉を開く存在となる。<br>
+      春風に舞う桜のように、どこか切ない笑顔を見せることも……。
+    </p>
+    <br>
+    <a href="characters.html" class="btn">▶ すべてのキャラクターを見る</a>
   </section>
 
   <!-- スポンサーリンク -->
