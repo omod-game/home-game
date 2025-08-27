@@ -9,8 +9,6 @@ const subtitle = document.querySelector(".centurycyclememoria-subtitle");
 
 // タイトル画面の演出
 window.addEventListener("load", () => {
-// タイトル画面の演出
-window.addEventListener("load", () => {
   // サブタイトルをフェードイン
   setTimeout(() => {
     subtitle.style.opacity = 1;
