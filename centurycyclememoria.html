@@ -8,28 +8,49 @@
   <link rel="icon" href="icon.jpg" type="image/jpeg">
   <meta name="theme-color" content="#000000">
   <style>
-    /* ホーム画面専用の背景 */
-    #centurycyclememoria-start-screen {
+    body {
       background: url('bg_moon_sakura.jpg') no-repeat center center fixed;
       background-size: cover;
+      font-family: 'Hiragino Maru Gothic ProN', 'Yu Gothic', sans-serif;
+      color: #fff;
+      text-align: center;
     }
-
-    /* ボタン共通デザイン */
-    .btn {
-      padding: 12px 30px;
-      font-size: 1.2em;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      background: rgba(255,255,255,0.85);
-      color: #000;
+    .overlay {
+      background: rgba(0, 0, 0, 0.6);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .centurycyclememoria-title {
+      font-size: 2.5rem;
       font-weight: bold;
-      margin: 10px auto;
+      margin-bottom: 0.5rem;
+    }
+    .centurycyclememoria-subtitle {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      opacity: 0.8;
+    }
+    .centurycyclememoria-title-image {
+      max-width: 80%;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+    }
+    /* ホームページと統一したボタン */
+    .btn {
+      background: linear-gradient(135deg, #ff7fbf, #7f7fff);
+      padding: 12px 28px;
+      border-radius: 9999px;
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: white;
       display: inline-block;
       transition: 0.3s;
     }
     .btn:hover {
-      background: rgba(255,255,255,1);
+      opacity: 0.85;
       transform: scale(1.05);
     }
   </style>
@@ -37,15 +58,15 @@
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("service-worker.js");
     }
-
     function startGame() {
       document.getElementById("centurycyclememoria-start-screen").style.display = "none";
       document.getElementById("centurycyclememoria-game-screen").style.display = "block";
     }
-
+    
     function goBack() {
       window.location.href = "centurycyclememoriahomepage.html";
     }
+
   </script>
 </head>
 <body>
@@ -58,18 +79,18 @@
     <img src="centurycyclememoriacollection.jpg" 
          alt="タイトル画像" 
          class="centurycyclememoria-title-image">
-
     <!-- 進むボタン -->
     <button id="centurycyclememoria-start-button" class="btn" onclick="startGame()">
       ▶ 運命の始まりへ
     </button>
     <p class="mt-2 text-sm opacity-80">月夜に舞う桜とともに、物語は動き出す</p>
-
+    
     <!-- 戻るボタン -->
     <button id="centurycyclememoria-back-button" class="btn" onclick="goBack()">
       ▶ はじまりの場所へ
     </button>
     <p class="mt-2 text-sm opacity-80">もう一度、出会いの瞬間から</p>
+
   </div>
 
   <!-- ゲーム画面 -->
