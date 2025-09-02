@@ -1,153 +1,89 @@
-body {
-  margin: 0;
-  font-family: "Hiragino Maru Gothic ProN", "メイリオ", sans-serif;
+body, html {
+  margin: 0; padding: 0;
+  width: 100%; height: 100%;
+  font-family: "Segoe UI", sans-serif;
   background: #000;
-  color: #fff;
   overflow: hidden;
 }
 
-/* タイトル画面 */
-#centurycyclememoria-start-screen {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  text-align: center;
-  overflow: hidden;
-}
-
-.centurycyclememoria-title-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.centurycyclememoria-title {
-  position: absolute;
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 3em;
-  font-weight: bold;
-  color: #fff;
-  text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
-  z-index: 2;
-}
-
-.centurycyclememoria-subtitle {
-  position: absolute;
-  top: 35%;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 1.4em;
-  font-style: italic;
-  color: #fdfdfd;
-  text-shadow: 1px 1px 6px rgba(0,0,0,0.9);
-  opacity: 0;
-  transition: opacity 3s ease;
-  z-index: 2;
-}
-
-#centurycyclememoria-start-button {
-  position: absolute;
-  bottom: 15%;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 12px 30px;
-  font-size: 1.5em;
-  border: none;
-  background: rgba(255,255,255,0.8);
-  color: #000;
-  border-radius: 10px;
-  cursor: pointer;
-  z-index: 2;
-  display: none;
-}
-
-#centurycyclememoria-start-button:hover {
-  background: rgba(255,255,255,1);
-}
-
-/* ゲーム画面 */
 #centurycyclememoria-game-screen {
   position: relative;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
 }
 
-#centurycyclememoria-background img {
+.bg-image, .char-image {
+  position: absolute;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: opacity 0.3s ease;
 }
 
 #centurycyclememoria-overlay {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: radial-gradient(circle at center, rgba(255,255,200,0.4), transparent 70%);
+  background: rgba(0,0,0,0);
   pointer-events: none;
-  opacity: 0;
-  transition: opacity 2s ease;
+  transition: opacity 0.3s ease;
 }
 
-#centurycyclememoria-character img {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 80%;
-  display: none;
-}
-
-/* テキストボックス全体（下部固定） */
-#centurycyclememoria-textbox {
+#centurycyclememoria-textbox-wrapper {
   position: absolute;
   bottom: 5%;
   left: 50%;
   transform: translateX(-50%);
-  width: 80%; /* 幅を少し広めに */
-  min-height: 140px;
-  background: rgba(0, 0, 0, 0.6); /* 半透明で背景が見える */
-  border: 2px solid #fff; /* 白い枠線 */
-  border-radius: 12px;
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start; /* 左寄せにして自然に */
-  text-align: left;
+  background: rgba(0,0,0,0.6);
   color: #fff;
-  font-size: 20px;
-  line-height: 1.8;
-  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 80%;
 }
 
-/* テキスト部分 */
+#centurycyclememoria-name {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
 #centurycyclememoria-text {
-  margin: 0;
-  white-space: pre-line;
-}
-
-/* タイトルの幅調整テスト */
-#centurycyclememoria-text-box {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  max-width: 800px;
-  background: rgba(0, 0, 0, 0.6);
-  border: 2px solid #fff;
-  border-radius: 12px;
-  padding: 20px;
-  color: #fff;
   font-size: 18px;
-  line-height: 1.6;
 }
 
-#centurycyclememoria-char-image {
+#choice-overlay {
   position: absolute;
-  bottom: 0;
-  right: 5%; /* ←ここで左右調整 */
-  height: 90%;
+  top: 0; left: 0; width: 100%; height: 100%;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  background-color: rgba(0,0,0,0.5);
+  z-index: 100;
 }
 
+#choice-text {
+  color: white;
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#choice-buttons button {
+  margin: 10px 0;
+  padding: 12px 24px;
+  font-size: 18px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background-color: rgba(255,255,255,0.1);
+  color: white;
+  transition: all 0.2s;
+}
+
+#choice-buttons button:hover {
+  background-color: #ffd700;
+  color: black;
+  transform: scale(1.05);
+}
