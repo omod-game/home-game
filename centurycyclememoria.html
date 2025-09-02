@@ -1,112 +1,29 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>世紀輪廻メモリア</title>
-  <link rel="stylesheet" href="centurycyclememoria.css">
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" href="icon.jpg" type="image/jpeg">
-  <meta name="theme-color" content="#000000">
-  <style>
-    body {
-      background: url('bg_moon_sakura.jpg') no-repeat center center fixed;
-      background-size: cover;
-      font-family: 'Hiragino Maru Gothic ProN', 'Yu Gothic', sans-serif;
-      color: #fff;
-      text-align: center;
-    }
-    .overlay {
-      background: rgba(0, 0, 0, 0.6);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-    .centurycyclememoria-title {
-      font-size: 2.5rem;
-      font-weight: bold;
-      margin-bottom: 0.5rem;
-    }
-    .centurycyclememoria-subtitle {
-      font-size: 1.1rem;
-      margin-bottom: 1.5rem;
-      opacity: 0.8;
-    }
-    .centurycyclememoria-title-image {
-      max-width: 80%;
-      border-radius: 12px;
-      margin-bottom: 2rem;
-    }
-    /* ホームページと統一したボタン */
-    .btn {
-      background: linear-gradient(135deg, #ff7fbf, #7f7fff);
-      padding: 12px 28px;
-      border-radius: 9999px;
-      font-weight: bold;
-      font-size: 1.2rem;
-      color: white;
-      display: inline-block;
-      transition: 0.3s;
-    }
-    .btn:hover {
-      opacity: 0.85;
-      transform: scale(1.05);
-    }
-  </style>
-  <script>
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("service-worker.js");
-    }
-    function startGame() {
-      document.getElementById("centurycyclememoria-start-screen").style.display = "none";
-      document.getElementById("centurycyclememoria-game-screen").style.display = "block";
-    }
-    
-    function goBack() {
-      window.location.href = "centurycyclememoriahomepage.html";
-    }
-
-  </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Century Cycle Memoria</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- タイトル画面 -->
-  <div id="centurycyclememoria-start-screen" class="overlay">
-    <div class="centurycyclememoria-title">世紀輪廻メモリア</div>
-    <div class="centurycyclememoria-subtitle">
-      春の朝。偶然の隣席が、百年をめぐる約束を呼び覚ます──。
-    </div>
-    <img src="centurycyclememoriacollection.jpg" 
-         alt="タイトル画像" 
-         class="centurycyclememoria-title-image">
-    <!-- 進むボタン -->
-    <button id="centurycyclememoria-start-button" class="btn" onclick="startGame()">
-      ▶ 運命の始まりへ
-    </button>
-    <p class="mt-2 text-sm opacity-80">月夜に舞う桜とともに、物語は動き出す</p>
+  <div id="centurycyclememoria-game-screen">
+    <img id="centurycyclememoria-bg-image" src="bg_black.jpg" class="bg-image">
+    <div id="centurycyclememoria-overlay"></div>
+    <img id="centurycyclememoria-char-image" class="char-image">
     
-    <!-- 戻るボタン -->
-    <button id="centurycyclememoria-back-button" class="btn" onclick="goBack()">
-      ▶ はじまりの場所へ
-    </button>
-    <p class="mt-2 text-sm opacity-80">もう一度、出会いの瞬間から</p>
-
-  </div>
-
-  <!-- ゲーム画面 -->
-  <div id="centurycyclememoria-game-screen" style="display:none;">
-    <div id="centurycyclememoria-background">
-      <img id="centurycyclememoria-bg-image" src="" alt="背景">
-      <div id="centurycyclememoria-overlay"></div>
+    <div id="centurycyclememoria-textbox-wrapper">
+      <div id="centurycyclememoria-name"></div>
+      <div id="centurycyclememoria-text"></div>
     </div>
-    <div id="centurycyclememoria-character">
-      <img id="centurycyclememoria-char-image" src="" alt="キャラクター">
-    </div>
-    <div id="centurycyclememoria-textbox">
-      <p id="centurycyclememoria-text"></p>
+
+    <!-- 選択肢オーバーレイ -->
+    <div id="choice-overlay">
+      <div id="choice-text"></div>
+      <div id="choice-buttons"></div>
     </div>
   </div>
 
-  <script src="centurycyclememoria.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
