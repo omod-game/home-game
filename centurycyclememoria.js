@@ -1,112 +1,125 @@
-const startButton = document.getElementById("centurycyclememoria-start-button");
-const startScreen = document.getElementById("centurycyclememoria-start-screen");
-const gameScreen = document.getElementById("centurycyclememoria-game-screen");
-const textElement = document.getElementById("centurycyclememoria-text");
-const bgImage = document.getElementById("centurycyclememoria-bg-image");
-const charImage = document.getElementById("centurycyclememoria-char-image");
-const overlay = document.getElementById("centurycyclememoria-overlay");
-const subtitle = document.querySelector(".centurycyclememoria-subtitle");
+document.addEventListener("DOMContentLoaded", () => {
+  const gameScreen = document.getElementById("centurycyclememoria-game-screen");
+  const bgImage = document.getElementById("centurycyclememoria-bg-image");
+  const charImage = document.getElementById("centurycyclememoria-char-image");
+  const overlay = document.getElementById("centurycyclememoria-overlay");
+  const textBoxWrapper = document.getElementById("centurycyclememoria-textbox-wrapper");
+  const textBox = document.getElementById("centurycyclememoria-text");
+  const nameBox = document.getElementById("centurycyclememoria-name");
 
-// タイトル画面の演出
-window.addEventListener("load", () => {
-  // サブタイトルをフェードイン
-  setTimeout(() => {
-    subtitle.style.opacity = 1;
-  }, 500);
+  const choiceOverlay = document.getElementById("choice-overlay");
+  const choiceText = document.getElementById("choice-text");
+  const choiceButtons = document.getElementById("choice-buttons");
 
-  // サブタイトル表示後にボタンを出す
-  setTimeout(() => {
-    startButton.style.display = "block";
-  }, 4000);
-});
+  let currentLine = 0;
+  let waitingChoice = false;
 
+  const affection = { miku: 0, shizuka: 0, rena: 0 };
 
-// シナリオ（未来との出会い）
-const scenario = [
-  { text: "──四月、転校初日の朝。", bg: "ccm_classroom_bg.jpg", group: true },
-  { text: "教室に入ると、ざわめきと新しい匂いが押し寄せてきた。", bg: "ccm_classroom_bg.jpg" },
-  { text: "「……ここが、俺の新しい日常か」", bg: "ccm_classroom_bg.jpg" },
-  { text: "緊張で胸が重い。それでも、期待に似たざわつきがどこか奥にある。", bg: "ccm_classroom_bg.jpg", group: true },
-  { text: "黒板には『席替え』と書かれていた。", bg: "ccm_classroom_bg.jpg" },
-  { text: "残った席は──桜井未来の隣だった。", bg: "ccm_classroom_bg.jpg" },
-  { text: "未来が振り返り、ぱっと咲くように笑った。", bg: "ccm_miku_smile.jpg" },
-  { text: "未来「よろしくね！」", bg: "ccm_miku_smile.jpg" },
-  { text: "偶然のようでいて、なぜかずっと前から決まっていた気がした。", bg: "ccm_miku_dream.jpg", overlay: true },
-  { text: "未来「転校生なんだよね？ どこから来たの？」", bg: "ccm_classroom_bg.jpg" },
-  { text: "「……ああ、ちょっと遠くから」", bg: "ccm_classroom_bg.jpg" },
-  { text: "未来「へえ！　なんだか楽しみだね。クラス替えもあったし、ちょうど新しいスタートだよ」", bg: "ccm_classroom_bg.jpg" },
-  { text: "その言葉に、不安が少しだけ和らいだ。", bg: "ccm_classroom_bg.jpg" },
-  { text: "窓の外、春風に舞う桜の花びらが、未来の笑顔を一層まぶしくしていた。", bg: "ccm_classroom_sakura.jpg" },
-  { text: "未来「ねえ、もしよかったら──放課後、学校案内してあげる！」", bg: "ccm_classroom_sakura.jpg" },
-  { text: "唐突な誘いに、胸の奥が熱くなる。", bg: "ccm_classroom_sakura.jpg" },
-  { text: "まるで、ずっと前から待ち望んでいた約束のように。", bg: "ccm_dream_overlay.jpg", overlay: true },
-  { text: "未来に連れられて、静かな図書室へと足を踏み入れる。", bg: "ccm_library_inside.jpg", char: "" },
-  { text: "本の匂いと、窓から差す夕陽の柔らかな光。時間が止まったような空気だった。", bg: "ccm_library_inside.jpg", char: "" },
-  { text: "未来「ここには、よく静がいるんだよ」", bg: "ccm_library_inside.jpg", char: "" },
-  { text: "未来「本に夢中になってて、声をかけても気づかないことがあるくらい」", bg: "ccm_library_inside.jpg", char: "" },
-  { text: "……静かに本をめくる姿が、容易に想像できた。", bg: "ccm_library_inside.jpg", char: "" },
-  { text: "図書室を出て、次に案内されたのは生徒会室。", bg: "ccm_council_door.jpg", char: "" },
-  { text: "未来「ここは玲奈がよくいるところ。生徒会長なんだ」", bg: "ccm_council_door.jpg", char: "" },
-  { text: "扉の奥からは、誰かが書類をめくる音がかすかに聞こえた。", bg: "ccm_council_door.jpg", char: "" },
-  { text: "未来「真面目でしっかりしてるけど……ちょっと厳しいところもあるかな」", bg: "ccm_council_door.jpg", char: "" },
-  { text: "未来の声には、尊敬とほんの少しの緊張が混じっていた。", bg: "ccm_council_door.jpg", char: "" }
-];
+  // -------------------------
+  // シナリオ（短縮例）
+  const scenario = [
+    { text: "──闇の中、ただひとつの光が浮かんでいた。", bg: "bg_black.jpg" },
+    { text: "月明かりに照らされ、桜の花びらが静かに舞う。", bg: "bg_night_sakura.jpg" },
+    { text: "その夜に交わされた約束は、百年の輪を越えて──再び巡る。", bg: "bg_night_sakura.jpg", overlay: true },
 
-let currentLine = 0;
+    { text: "──そして、四月。", bg: "bg_classroom_morning.jpg" },
+    { speaker: "桜井 未来", text: "よろしくね！", bg: "bg_classroom_morning.jpg", char: "char_miku_smile.png" },
 
-function showLine() {
-  let line = scenario[currentLine];
-  let nextLine = scenario[currentLine + 1];
-  let displayText = "";
+    // 選択肢
+    { 
+      choice: true,
+      text: "未来の案内をどうする？",
+      options: [
+        { text: "未来と一緒に学校を見て回る", next: "library_intro", affection: { miku: 1 }, bg: "bg_library_inside.jpg" },
+        { text: "一人で校内を歩いてみたい", next: "self_walk", bg: "bg_school_corridor_noon.jpg" }
+      ]
+    },
 
-  // group: true がある場合は2行まとめて表示
-  if (line.group && nextLine) {
-    displayText = formatText(line.text) + "\n" + formatText(nextLine.text);
-    currentLine += 2; // 2行進める
-    applyLineSettings(nextLine); // 演出は後ろの行を反映
-  } else {
-    displayText = formatText(line.text);
-    currentLine += 1;
-    applyLineSettings(line);
+    { id: "library_intro", text: "未来に連れられて、静かな図書室へと足を踏み入れる。", bg: "bg_library_inside.jpg" },
+    { id: "self_walk", text: "一人で校内を歩いてみることにした。", bg: "bg_school_corridor_noon.jpg" }
+  ];
+
+  // -------------------------
+  function showLine() {
+    const line = scenario[currentLine];
+    if (!line) return;
+
+    if (line.choice) {
+      waitingChoice = true;
+      displayChoice(line);
+      return;
+    }
+    waitingChoice = false;
+
+    // 背景切替
+    if (line.bg) bgImage.src = line.bg;
+
+    // キャラ切替
+    if (line.char) {
+      charImage.src = line.char;
+      charImage.style.display = "block";
+    } else {
+      charImage.style.display = "none";
+    }
+
+    // オーバーレイ
+    overlay.style.opacity = line.overlay ? 1 : 0;
+
+    // 名前とセリフ
+    if (line.speaker) {
+      nameBox.textContent = line.speaker;
+      nameBox.style.display = "inline-block";
+      textBox.textContent = `「${line.text}」`;
+    } else {
+      nameBox.style.display = "none";
+      textBox.textContent = line.text;
+    }
+
+    // affection
+    if (line.affection) {
+      for (const key in line.affection) affection[key] += line.affection[key];
+    }
   }
 
-  textElement.innerHTML = displayText.replace(/\n/g, "<br>");
-}
+  // -------------------------
+  function displayChoice(line) {
+    choiceOverlay.style.display = "flex";
+    choiceText.textContent = line.text;
+    choiceButtons.innerHTML = "";
 
-// テキスト整形（キャラ名で色分けなど）
-function formatText(text) {
-  if (text.startsWith("未来")) {
-    return text.replace(
-      "未来",
-      "<span style='color:#ff7fbf;font-weight:bold;'>未来</span>"
-    );
+    line.options.forEach(opt => {
+      const btn = document.createElement("button");
+      btn.textContent = opt.text;
+
+      // hoverで背景切替
+      btn.addEventListener("mouseenter", () => {
+        if (opt.bg) bgImage.src = opt.bg;
+      });
+
+      btn.addEventListener("click", () => {
+        if (opt.affection) {
+          for (const key in opt.affection) affection[key] += opt.affection[key];
+        }
+        if (opt.next) {
+          currentLine = scenario.findIndex(l => l.id === opt.next);
+        } else {
+          currentLine++;
+        }
+        choiceOverlay.style.display = "none";
+        showLine();
+      });
+
+      choiceButtons.appendChild(btn);
+    });
   }
-  return text;
-}
 
+  // -------------------------
+  gameScreen.addEventListener("click", () => {
+    if (waitingChoice) return;
+    currentLine++;
+    if (currentLine < scenario.length) showLine();
+  });
 
-function applyLineSettings(line) {
-  if (line.bg) bgImage.src = line.bg;
-  if (line.char) {
-    charImage.style.display = "block";
-    charImage.src = line.char;
-  } else {
-    charImage.style.display = "none";
-  }
-  overlay.style.opacity = line.overlay ? 1 : 0;
-}
-
-gameScreen.addEventListener("click", () => {
-  if (currentLine < scenario.length) {
-    showLine();
-  } else {
-    textElement.textContent = "（次のシナリオへ…）";
-  }
-});
-
-startButton.addEventListener("click", () => {
-  startScreen.style.display = "none";
-  gameScreen.style.display = "block";
-  currentLine = 0;
   showLine();
 });
